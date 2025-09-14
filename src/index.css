@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Scroll Animation Classes */
+.animate-fade-in-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-fade-in-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.animate-fade-in-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-fade-in-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.animate-fade-in-right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-fade-in-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.animate-scale-in {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-scale-in.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Staggered animations */
+.animate-stagger-1 { transition-delay: 0.1s; }
+.animate-stagger-2 { transition-delay: 0.2s; }
+.animate-stagger-3 { transition-delay: 0.3s; }
+.animate-stagger-4 { transition-delay: 0.4s; }
+
+/* Voiceflow Chat Widget Fixes */
+#voiceflow-chat {
+  z-index: 9999 !important;
+}
+
+/* Ensure chat widget container has proper positioning */
+[data-voiceflow-chat] {
+  position: fixed !important;
+  bottom: 20px !important;
+  right: 20px !important;
+  z-index: 9999 !important;
+}
+
+/* Fix for chat widget iframe positioning */
+iframe[src*="voiceflow"] {
+  position: fixed !important;
+  bottom: 20px !important;
+  right: 20px !important;
+  z-index: 9999 !important;
+}
