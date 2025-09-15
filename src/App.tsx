@@ -18,6 +18,18 @@ type Page = 'home' | 'contact' | 'privacy' | 'terms';
 function App() {
   const [currentPage, setCurrentPage] = useState<Page>('home');
 
+  const handleContactClick = () => {
+    setCurrentPage('contact');
+  };
+
+  const handleTermsClick = () => {
+    setCurrentPage('terms');
+  };
+
+  const handlePrivacyClick = () => {
+    setCurrentPage('privacy');
+  };
+
   const renderPage = () => {
     switch (currentPage) {
       case 'contact':
@@ -29,13 +41,13 @@ function App() {
       default:
         return (
           <>
-            <Hero onGetStarted={() => setCurrentPage('contact')} />
-            <Services />
+            <Hero onContactClick={handleContactClick} />
+            <Services onContactClick={handleContactClick} />
             <About />
             <Authority />
             <PainPoints />
-            <HowItWorks />
-            <CallToAction onGetStarted={() => setCurrentPage('contact')} />
+            <HowItWorks onContactClick={handleContactClick} />
+            <CallToAction onContactClick={handleContactClick} />
           </>
         );
     }
@@ -44,14 +56,15 @@ function App() {
   return (
     <div className="min-h-screen bg-white">
       <Header 
-        currentPage={currentPage}
-        onNavigate={setCurrentPage}
+        onContactClick={handleContactClick}
+        onTermsClick={handleTermsClick}
       />
       <main>
         {renderPage()}
       </main>
       <Footer 
-        onNavigate={setCurrentPage}
+        onTermsClick={handleTermsClick}
+        onPrivacyClick={handlePrivacyClick}
       />
       <ScrollToTop />
     </div>
