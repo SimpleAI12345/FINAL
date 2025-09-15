@@ -1,10 +1,22 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import App from './App.tsx';
+import './index.css';
 
-// https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [react()],
-  optimizeDeps: {
-    exclude: ['lucide-react'],
-  },
-});
+console.log('Main.tsx loaded');
+
+const rootElement = document.getElementById('root');
+console.log('Root element:', rootElement);
+
+if (rootElement) {
+  console.log('Creating React root...');
+  createRoot(rootElement).render(
+    <StrictMode>
+      <App />
+    </StrictMode>
+  );
+  console.log('React app rendered');
+} else {
+  console.error('Root element not found');
+  document.body.innerHTML = '<div style="padding: 20px; font-family: Arial;"><h1>Error: Root element not found</h1><p>The React app could not initialize properly.</p></div>';
+}
