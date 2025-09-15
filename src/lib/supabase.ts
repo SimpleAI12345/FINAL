@@ -1,21 +1,29 @@
-import { createClient } from '@supabase/supabase-js';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import App from './App.tsx';
+import './index.css';
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+console.log('Main.tsx loaded');
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error('Missing Supabase environment variables');
+console.log('Main.tsx loaded');
+
+const rootElement = document.getElementById('root');
+console.log('Root element:', rootElement);
+
+console.log('Root element:', rootElement);
+
+if (rootElement) {
+  console.log('Creating React root...');
+  console.log('Creating React root...');
+  createRoot(rootElement).render(
+    <StrictMode>
+      <App />
+    </StrictMode>
+  );
+  console.log('React app rendered');
+  console.log('React app rendered');
+} else {
+  console.error('Root element not found');
+  document.body.innerHTML = '<div style="padding: 20px; font-family: Arial;"><h1>Error: Root element not found</h1><p>The React app could not initialize properly.</p></div>';
+  document.body.innerHTML = '<div style="padding: 20px; font-family: Arial;"><h1>Error: Root element not found</h1><p>The React app could not initialize properly.</p></div>';
 }
-
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
-
-export type Inquiry = {
-  id?: string;
-  name: string;
-  email: string;
-  selected_service: string;
-  company_name: string;
-  problem_to_solve: string;
-  additional_info?: string;
-  created_at?: string;
-};
