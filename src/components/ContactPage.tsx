@@ -104,21 +104,6 @@ export default function ContactPage({ onBack }: ContactPageProps) {
       
       setIsSubmitted(true);
       
-      // Reset form after successful submission
-      setTimeout(() => {
-        setFormData({
-          name: '',
-          email: '',
-          selectedService: '',
-          companyName: '',
-          problemToSolve: '',
-          additionalInfo: '',
-          agreeToTerms: false
-        });
-        setIsSubmitted(false);
-        onBack();
-      }, 3000);
-      
     } catch (error) {
       console.error('Form submission error:', error);
       // You could add error state handling here
@@ -176,9 +161,12 @@ export default function ContactPage({ onBack }: ContactPageProps) {
               <p className="text-base sm:text-lg text-gray-600 mb-6">
                 We've received your inquiry and will get back to you within 24 hours.
               </p>
-              <p className="text-sm text-gray-500">
-                Redirecting you back to the homepage...
-              </p>
+              <button
+                onClick={onBack}
+                className="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors font-medium"
+              >
+                Back to Home
+              </button>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
