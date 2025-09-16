@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowLeft, Send } from 'lucide-react';
-import { supabase } from '../lib/supabase';
+import { supabase, isSupabaseConfigured } from '../lib/supabase';
 
 interface ContactPageProps {
   onBack: () => void;
@@ -30,6 +30,22 @@ export default function ContactPage({ onBack }: ContactPageProps) {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus('idle');
+    
+    // Check if Supabase is properly configured
+    if (!isSupabaseConfigured()) {
+      console.log('Supabase not configured, showing demo success message');
+      setSubmitStatus('success');
+      setFormData({
+        name: '',
+        email: '',
+        selectedService: '',
+        companyName: '',
+        problemToSolve: '',
+        additionalInfo: ''
+      });
+      setIsSubmitting(false);
+      return;
+    }
     
     try {
       console.log('Submitting form data:', formData);
