@@ -31,6 +31,12 @@ export default function ContactPage({ onBack }: ContactPageProps) {
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
+    // Test connection first
+    console.log('=== SUPABASE CONNECTION TEST ===');
+    console.log('VITE_SUPABASE_URL:', import.meta.env.VITE_SUPABASE_URL);
+    console.log('VITE_SUPABASE_ANON_KEY:', import.meta.env.VITE_SUPABASE_ANON_KEY ? 'Present' : 'Missing');
+    console.log('Supabase client:', supabase);
+
     try {
       console.log('Starting form submission...');
       console.log('Form data:', formData);
