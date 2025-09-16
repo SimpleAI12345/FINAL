@@ -32,18 +32,25 @@ export default function ContactPage({ onBack }: ContactPageProps) {
     setSubmitStatus('idle');
 
     try {
+      console.log('Submitting form data:', formData);
+      
       const { error } = await supabase
         .from('inquiries')
-        .insert({
+        .insert([{
           name: formData.name,
           email: formData.email,
           selected_service: formData.selectedService,
           company_name: formData.companyName,
           problem_to_solve: formData.problemToSolve,
           additional_info: formData.additionalInfo
-        });
+        }]);
 
-      if (error) throw error;
+      if (error) {
+        console.error('Supabase error:', error);
+        throw error;
+      }
+
+      console.log('Form submitted successfully');
 
       setSubmitStatus('success');
       setFormData({
