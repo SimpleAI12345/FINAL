@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowLeft, Send } from 'lucide-react';
+import { supabase } from '../lib/supabase';
 
 interface ContactPageProps {
   onBack: () => void;
@@ -30,22 +31,9 @@ export default function ContactPage({ onBack }: ContactPageProps) {
     setIsSubmitting(true);
     setSubmitStatus('idle');
     
-    // Simulate form submission for now
-    setTimeout(() => {
-      setSubmitStatus('success');
-      setFormData({
-        name: '',
-        email: '',
-        selectedService: '',
-        companyName: '',
-        problemToSolve: '',
-        additionalInfo: ''
-      });
-      setIsSubmitting(false);
-    }, 1000);
-    
-    /*
     try {
+      console.log('Submitting form data:', formData);
+      
       const { error } = await supabase
         .from('inquiries')
         .insert([{
@@ -57,12 +45,27 @@ export default function ContactPage({ onBack }: ContactPageProps) {
           additional_info: formData.additionalInfo
         }]);
 
+      if (error) {
+        console.error('Supabase error:', error);
+        setSubmitStatus('error');
+      } else {
+        console.log('Form submitted successfully!');
+        setSubmitStatus('success');
+        setFormData({
+          name: '',
+          email: '',
+          selectedService: '',
+          companyName: '',
+          problemToSolve: '',
+          additionalInfo: ''
+        });
+      }
     } catch (error) {
+      console.error('Network error:', error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
     }
-    */
   };
 
   return (
