@@ -63,6 +63,8 @@ export default function ContactPage({ onBack }: ContactPageProps) {
       } else {
         console.log('⚠️ Supabase not configured, showing demo success');
         await new Promise(resolve => setTimeout(resolve, 1500));
+        setSubmitStatus('success');
+      }
       // Clear form on success
       if (submitStatus === 'success') {
         setFormData({
