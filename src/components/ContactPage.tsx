@@ -91,7 +91,7 @@ export default function ContactPage({ onBack }: ContactPageProps) {
                 <div className="space-y-4">
                   <div className="flex items-center text-gray-300">
                     <Mail className="w-5 h-5 mr-3 text-purple-400" />
-                    <span>hello@simpleai.com</span>
+                    <span>info@justsimpleai.com</span>
                   </div>
                   <div className="flex items-center text-gray-300">
                     <Phone className="w-5 h-5 mr-3 text-purple-400" />
@@ -195,9 +195,9 @@ export default function ContactPage({ onBack }: ContactPageProps) {
                       className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                     >
                       <option value="">Select a service</option>
-                      <option value="ai-chatbots">AI Chatbots</option>
-                      <option value="process-automation">Process Automation</option>
-                      <option value="data-analysis">Data Analysis</option>
+                      <option value="ai-customer-support">AI Customer Support Agents</option>
+                      <option value="ai-appointment-setting">AI Appointment Setting Agents</option>
+                      <option value="website-build-design">Website Build & Design</option>
                       <option value="custom-ai">Custom AI Solutions</option>
                       <option value="consultation">Consultation</option>
                     </select>
