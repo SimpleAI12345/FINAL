@@ -52,32 +52,29 @@ export default function ContactPage({ onBack }: ContactPageProps) {
 
         if (error) {
           console.error('❌ Database error:', error);
-          console.log('⚠️ Falling back to demo mode due to database error');
-          // Fall back to demo success instead of showing error
-          await new Promise(resolve => setTimeout(resolve, 1500));
-          setSubmitStatus('success');
-        } else {
-          console.log('✅ Successfully saved to database!');
-          setSubmitStatus('success');
+          setSubmitStatus('error');
+          return;
         }
-      } else {
-        console.log('⚠️ Supabase not configured, showing demo success');
-        await new Promise(resolve => setTimeout(resolve, 1500));
+        
+        console.log('✅ Successfully saved to database!');
         setSubmitStatus('success');
+      } else {
+        console.warn('⚠️ Supabase not configured. Please set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY.');
+        setSubmitStatus('error');
+        return;
       }
+      
       // Clear form on success
-      if (submitStatus === 'success') {
-        setFormData({
-          name: '',
-          email: '',
-          selectedService: '',
-          companyName: '',
-          problemToSolve: '',
-          additionalInfo: ''
-        });
-      }
+      setFormData({
+        name: '',
+        email: '',
+        selectedService: '',
+        companyName: '',
+        problemToSolve: '',
+        additionalInfo: ''
+      });
     } catch (error) {
-      console.error('Network error:', error);
+      console.error('❌ Network/unexpected error:', error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);

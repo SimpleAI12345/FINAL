@@ -1,15 +1,19 @@
-import { createClient } from '@supabase/supabase-js'
+const { createClient } = require('@supabase/supabase-js')
 
-// Use environment variables if available, otherwise use working defaults
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://mcgwmosxmghufkgkitjb.supabase.co'
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || ''
+// Require proper environment variables - no fallbacks
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 
 console.log('🔧 Supabase URL:', supabaseUrl)
 console.log('🔧 Supabase Key exists:', !!supabaseAnonKey)
 
-// Only create client if we have a valid key
+if (!supabaseUrl || !supabaseAnonKey) {
+  console.error('❌ Missing VITE_SUPABASE_URL or VITE_SUPABASE_ANON_KEY environment variables')
+}
+
+// Only create client if we have valid credentials
 let supabase = null
-if (supabaseAnonKey && supabaseAnonKey.length > 10) {
+if (supabaseUrl && supabaseAnonKey) {
   try {
     supabase = createClient(supabaseUrl, supabaseAnonKey)
     console.log('✅ Supabase client created successfully')
@@ -22,7 +26,7 @@ export { supabase }
 
 export const testSupabaseConnection = async () => {
   if (!supabase) {
-    console.log('⚠️ Supabase client not available')
+    console.error('⚠️ Supabase client not available - missing environment variables')
     return false
   }
   
@@ -41,5 +45,5 @@ export const testSupabaseConnection = async () => {
 }
 
 export const isSupabaseConfigured = () => {
-  return supabase !== null && supabaseUrl && supabaseAnonKey && supabaseUrl.includes('supabase.co')
+  return supabase !== null && supabaseUrl && supabaseAnonKey
 }
