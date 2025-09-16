@@ -33,6 +33,7 @@ export default function ContactPage({ onBack }: ContactPageProps) {
     try {
       
       // Check if Supabase is properly configured
+      if (!supabase) {
         throw new Error('Supabase configuration is missing. Please set up your environment variables.');
       }
       
