@@ -34,14 +34,14 @@ export default function ContactPage({ onBack }: ContactPageProps) {
     try {
       const { error } = await supabase
         .from('inquiries')
-        .insert([{
+        .insert({
           name: formData.name,
           email: formData.email,
           selected_service: formData.selectedService,
           company_name: formData.companyName,
           problem_to_solve: formData.problemToSolve,
           additional_info: formData.additionalInfo
-        }]);
+        });
 
       if (error) throw error;
 
