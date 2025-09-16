@@ -1,4 +1,4 @@
-const { createClient } = require('@supabase/supabase-js')
+import { createClient } from '@supabase/supabase-js'
 
 // Require proper environment variables - no fallbacks
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
