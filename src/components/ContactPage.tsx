@@ -32,7 +32,13 @@ export default function ContactPage({ onBack }: ContactPageProps) {
     setSubmitStatus('idle');
 
     try {
-      console.log('Submitting form data:', formData);
+      console.log('Starting form submission...');
+      console.log('Form data:', formData);
+      
+      // Check if Supabase is properly configured
+      if (!import.meta.env.VITE_SUPABASE_URL || !import.meta.env.VITE_SUPABASE_ANON_KEY) {
+        throw new Error('Supabase configuration is missing. Please set up your environment variables.');
+      }
       
       const { error } = await supabase
         .from('inquiries')
@@ -46,7 +52,12 @@ export default function ContactPage({ onBack }: ContactPageProps) {
         }]);
 
       if (error) {
-        console.error('Supabase error:', error);
+        console.error('Supabase error details:', {
+          message: error.message,
+          details: error.details,
+          hint: error.hint,
+          code: error.code
+        });
         throw error;
       }
 
@@ -62,7 +73,7 @@ export default function ContactPage({ onBack }: ContactPageProps) {
         additionalInfo: ''
       });
     } catch (error) {
-      console.error('Error submitting form:', error);
+      console.error('Complete error details:', error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
