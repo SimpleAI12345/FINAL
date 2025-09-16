@@ -31,42 +31,36 @@ export default function ContactPage({ onBack }: ContactPageProps) {
     setIsSubmitting(true);
     setSubmitStatus('idle');
     
-    // Check if Supabase is properly configured
-    if (!isSupabaseConfigured()) {
-      console.log('Supabase not configured, showing demo success message');
-      setSubmitStatus('success');
-      setFormData({
-        name: '',
-        email: '',
-        selectedService: '',
-        companyName: '',
-        problemToSolve: '',
-        additionalInfo: ''
-      });
-      setIsSubmitting(false);
-      return;
-    }
-    
     try {
-      console.log('Submitting form data:', formData);
-      
-      const { error } = await supabase
-        .from('inquiries')
-        .insert([{
-          name: formData.name,
-          email: formData.email,
-          selected_service: formData.selectedService,
-          company_name: formData.companyName,
-          problem_to_solve: formData.problemToSolve,
-          additional_info: formData.additionalInfo
-        }]);
-
-      if (error) {
-        console.error('Supabase error:', error);
-        setSubmitStatus('error');
-      } else {
-        console.log('Form submitted successfully!');
+      // Check if Supabase is properly configured
+      if (!isSupabaseConfigured() || !supabase) {
+        console.log('Supabase not configured, showing demo success message');
         setSubmitStatus('success');
+      } else {
+        console.log('Submitting form data to Supabase:', formData);
+        
+        const { error } = await supabase
+          .from('inquiries')
+          .insert([{
+            name: formData.name,
+            email: formData.email,
+            selected_service: formData.selectedService,
+            company_name: formData.companyName,
+            problem_to_solve: formData.problemToSolve,
+            additional_info: formData.additionalInfo
+          }]);
+
+        if (error) {
+          console.error('Supabase error:', error);
+          setSubmitStatus('error');
+        } else {
+          console.log('✅ Form submitted successfully to database!');
+          setSubmitStatus('success');
+        }
+      }
+      
+      // Clear form on success
+      if (submitStatus !== 'error') {
         setFormData({
           name: '',
           email: '',
