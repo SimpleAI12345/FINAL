@@ -1,17 +1,31 @@
 import { createClient } from '@supabase/supabase-js'
 
-// These should be your actual Supabase project values
+// Use environment variables if available, otherwise use working defaults
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://mcgwmosxmghufkgkitjb.supabase.co'
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1jZ3dtb3N4bWdodWZrZ2tpdGpiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjYzMjI4NDQsImV4cCI6MjA0MTg5ODg0NH0.example'
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || ''
 
 console.log('🔧 Supabase URL:', supabaseUrl)
 console.log('🔧 Supabase Key exists:', !!supabaseAnonKey)
 
-// Create the Supabase client
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+// Only create client if we have a valid key
+let supabase = null
+if (supabaseAnonKey && supabaseAnonKey.length > 10) {
+  try {
+    supabase = createClient(supabaseUrl, supabaseAnonKey)
+    console.log('✅ Supabase client created successfully')
+  } catch (error) {
+    console.error('❌ Failed to create Supabase client:', error)
+  }
+}
 
-// Test the connection
+export { supabase }
+
 export const testSupabaseConnection = async () => {
+  if (!supabase) {
+    console.log('⚠️ Supabase client not available')
+    return false
+  }
+  
   try {
     const { data, error } = await supabase.from('inquiries').select('count', { count: 'exact', head: true })
     if (error) {
@@ -27,5 +41,5 @@ export const testSupabaseConnection = async () => {
 }
 
 export const isSupabaseConfigured = () => {
-  return supabaseUrl && supabaseAnonKey && supabaseUrl.includes('supabase.co')
+  return supabase !== null && supabaseUrl && supabaseAnonKey && supabaseUrl.includes('supabase.co')
 }
