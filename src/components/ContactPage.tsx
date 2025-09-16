@@ -30,19 +30,9 @@ export default function ContactPage({ onBack }: ContactPageProps) {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus('idle');
-
-    // Test connection first
-    console.log('=== SUPABASE CONNECTION TEST ===');
-    console.log('VITE_SUPABASE_URL:', import.meta.env.VITE_SUPABASE_URL);
-    console.log('VITE_SUPABASE_ANON_KEY:', import.meta.env.VITE_SUPABASE_ANON_KEY ? 'Present' : 'Missing');
-    console.log('Supabase client:', supabase);
-
     try {
-      console.log('Starting form submission...');
-      console.log('Form data:', formData);
       
       // Check if Supabase is properly configured
-      if (!import.meta.env.VITE_SUPABASE_URL || !import.meta.env.VITE_SUPABASE_ANON_KEY) {
         throw new Error('Supabase configuration is missing. Please set up your environment variables.');
       }
       
@@ -58,16 +48,9 @@ export default function ContactPage({ onBack }: ContactPageProps) {
         }]);
 
       if (error) {
-        console.error('Supabase error details:', {
-          message: error.message,
-          details: error.details,
-          hint: error.hint,
-          code: error.code
-        });
+        console.error('Supabase error:', error.message);
         throw error;
       }
-
-      console.log('Form submitted successfully');
 
       setSubmitStatus('success');
       setFormData({
@@ -79,7 +62,7 @@ export default function ContactPage({ onBack }: ContactPageProps) {
         additionalInfo: ''
       });
     } catch (error) {
-      console.error('Complete error details:', error);
+      console.error('Form submission error:', error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
