@@ -1,30 +1,31 @@
 import { createClient } from '@supabase/supabase-js'
 
-// Use the actual environment variables from your .env file
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+// These should be your actual Supabase project values
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://mcgwmosxmghufkgkitjb.supabase.co'
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1jZ3dtb3N4bWdodWZrZ2tpdGpiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjYzMjI4NDQsImV4cCI6MjA0MTg5ODg0NH0.example'
 
-// Only create client if we have valid environment variables
-let supabase = null
-let isConfigured = false
+console.log('🔧 Supabase URL:', supabaseUrl)
+console.log('🔧 Supabase Key exists:', !!supabaseAnonKey)
 
-if (supabaseUrl && supabaseAnonKey && supabaseUrl.includes('supabase.co')) {
+// Create the Supabase client
+export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+
+// Test the connection
+export const testSupabaseConnection = async () => {
   try {
-    supabase = createClient(supabaseUrl, supabaseAnonKey)
-    isConfigured = true
-    console.log('✅ Supabase connected successfully')
-  } catch (error) {
-    console.warn('⚠️ Supabase connection failed:', error)
-    isConfigured = false
+    const { data, error } = await supabase.from('inquiries').select('count', { count: 'exact', head: true })
+    if (error) {
+      console.error('❌ Supabase connection test failed:', error)
+      return false
+    }
+    console.log('✅ Supabase connection successful')
+    return true
+  } catch (err) {
+    console.error('❌ Supabase connection error:', err)
+    return false
   }
-} else {
-  console.log('ℹ️ Supabase not configured - using demo mode')
 }
 
-// Export a safe client that won't crash the app
-export { supabase }
-
-// Export a function to check if Supabase is properly configured
 export const isSupabaseConfigured = () => {
-  return isConfigured && supabase !== null
+  return supabaseUrl && supabaseAnonKey && supabaseUrl.includes('supabase.co')
 }

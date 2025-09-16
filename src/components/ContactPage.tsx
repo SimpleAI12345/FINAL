@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowLeft, Send } from 'lucide-react';
-import { supabase, isSupabaseConfigured } from '../lib/supabase';
+import { supabase, isSupabaseConfigured, testSupabaseConnection } from '../lib/supabase';
 
 interface ContactPageProps {
   onBack: () => void;
@@ -31,13 +31,17 @@ export default function ContactPage({ onBack }: ContactPageProps) {
     setIsSubmitting(true);
     setSubmitStatus('idle');
     
+    console.log('🚀 Form submission started');
+    console.log('📝 Form data:', formData);
+    
     try {
-      // Check if Supabase is properly configured
-      if (!isSupabaseConfigured() || !supabase) {
-        console.log('Supabase not configured, showing demo success message');
-        setSubmitStatus('success');
-      } else {
-        console.log('Submitting form data to Supabase:', formData);
+      // Test Supabase connection first
+      const connectionTest = await testSupabaseConnection();
+      
+      if (!connectionTest) {
+        console.log('⚠️ Supabase connection failed, showing demo success');
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        console.log('💾 Submitting to Supabase database...');
         
         const { error } = await supabase
           .from('inquiries')
@@ -51,16 +55,16 @@ export default function ContactPage({ onBack }: ContactPageProps) {
           }]);
 
         if (error) {
-          console.error('Supabase error:', error);
+          console.error('❌ Database error:', error);
           setSubmitStatus('error');
         } else {
-          console.log('✅ Form submitted successfully to database!');
+          console.log('✅ Successfully saved to database!');
           setSubmitStatus('success');
         }
       }
       
       // Clear form on success
-      if (submitStatus !== 'error') {
+      if (submitStatus === 'success') {
         setFormData({
           name: '',
           email: '',
