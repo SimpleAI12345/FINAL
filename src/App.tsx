@@ -29,83 +29,83 @@ export default function Services({ onContactClick }: ServicesProps) {
         "@type": "OfferingCatalog",
         "name": "AI Automation Services",
         "itemListElement": [
-          {
-            "@type": "Service",
-            "@id": "https://justsimpleai.com/services/ai-customer-support",
-            "name": "AI Customer Support Agents",
-            "description": "Available 24/7, instantly resolving customer queries, freeing your team for high-value work.",
-            "provider": {
-              "@type": "Organization",
-              "name": "SimpleAI",
-              "url": "https://justsimpleai.com"
-            },
-            "serviceType": "AI Customer Support",
-            "category": "Customer Service Automation",
-            "areaServed": "Worldwide",
-            "availableChannel": {
-              "@type": "ServiceChannel",
-              "serviceUrl": "https://justsimpleai.com/contact",
-              "serviceName": "Online Consultation"
-            }
+        {
+          "@type": "Service",
+          "@id": "https://justsimpleai.com/services/ai-customer-support",
+          "name": "AI Customer Support Agents",
+          "description": "Available 24/7, instantly resolving customer queries, freeing your team for high-value work.",
+          "provider": {
+            "@type": "Organization",
+            "name": "SimpleAI",
+            "url": "https://justsimpleai.com"
           },
-          {
-            "@type": "Service",
-            "@id": "https://justsimpleai.com/services/ai-appointment-setting",
-            "name": "AI Appointment Setting Agents",
-            "description": "Never miss a lead with AI agents that schedule, confirm, and manage appointments automatically.",
-            "provider": {
-              "@type": "Organization",
-              "name": "SimpleAI",
-              "url": "https://justsimpleai.com"
-            },
-            "serviceType": "AI Appointment Scheduling",
-            "category": "Sales Automation",
-            "areaServed": "Worldwide",
-            "availableChannel": {
-              "@type": "ServiceChannel",
-              "serviceUrl": "https://justsimpleai.com/contact",
-              "serviceName": "Online Consultation"
-            }
-          },
-          {
-            "@type": "Service",
-            "@id": "https://justsimpleai.com/services/crm-integration",
-            "name": "CRM Integration Services",
-            "description": "Seamlessly connect your existing CRM with AI automation for streamlined lead management and improved conversion rates.",
-            "provider": {
-              "@type": "Organization",
-              "name": "SimpleAI",
-              "url": "https://justsimpleai.com"
-            },
-            "serviceType": "CRM Integration",
-            "category": "Business Process Automation",
-            "areaServed": "Worldwide",
-            "availableChannel": {
-              "@type": "ServiceChannel",
-              "serviceUrl": "https://justsimpleai.com/contact",
-              "serviceName": "Online Consultation"
-            }
-          },
-          {
-            "@type": "Service",
-            "@id": "https://justsimpleai.com/services/website-development",
-            "name": "AI-Assisted Website Development",
-            "description": "Professional, AI-assisted websites designed to convert visitors into paying customers with modern design and optimization.",
-            "provider": {
-              "@type": "Organization",
-              "name": "SimpleAI",
-              "url": "https://justsimpleai.com"
-            },
-            "serviceType": "Website Development",
-            "category": "Web Design & Development",
-            "areaServed": "Worldwide",
-            "availableChannel": {
-              "@type": "ServiceChannel",
-              "serviceUrl": "https://justsimpleai.com/contact",
-              "serviceName": "Online Consultation"
-            }
+          "serviceType": "AI Customer Support",
+          "category": "Customer Service Automation",
+          "areaServed": "Worldwide",
+          "availableChannel": {
+            "@type": "ServiceChannel",
+            "serviceUrl": "https://justsimpleai.com/contact",
+            "serviceName": "Online Consultation"
           }
-        ]
+        },
+        {
+          "@type": "Service",
+          "@id": "https://justsimpleai.com/services/ai-appointment-setting",
+          "name": "AI Appointment Setting Agents",
+          "description": "Never miss a lead with AI agents that schedule, confirm, and manage appointments automatically.",
+          "provider": {
+            "@type": "Organization",
+            "name": "SimpleAI",
+            "url": "https://justsimpleai.com"
+          },
+          "serviceType": "AI Appointment Scheduling",
+          "category": "Sales Automation",
+          "areaServed": "Worldwide",
+          "availableChannel": {
+            "@type": "ServiceChannel",
+            "serviceUrl": "https://justsimpleai.com/contact",
+            "serviceName": "Online Consultation"
+          }
+        },
+        {
+          "@type": "Service",
+          "@id": "https://justsimpleai.com/services/crm-integration",
+          "name": "CRM Integration Services",
+          "description": "Seamlessly connect your existing CRM with AI automation for streamlined lead management and improved conversion rates.",
+          "provider": {
+            "@type": "Organization",
+            "name": "SimpleAI",
+            "url": "https://justsimpleai.com"
+          },
+          "serviceType": "CRM Integration",
+          "category": "Business Process Automation",
+          "areaServed": "Worldwide",
+          "availableChannel": {
+            "@type": "ServiceChannel",
+            "serviceUrl": "https://justsimpleai.com/contact",
+            "serviceName": "Online Consultation"
+          }
+        },
+        {
+          "@type": "Service",
+          "@id": "https://justsimpleai.com/services/website-development",
+          "name": "AI-Assisted Website Development",
+          "description": "Professional, AI-assisted websites designed to convert visitors into paying customers with modern design and optimization.",
+          "provider": {
+            "@type": "Organization",
+            "name": "SimpleAI",
+            "url": "https://justsimpleai.com"
+          },
+          "serviceType": "Website Development",
+          "category": "Web Design & Development",
+          "areaServed": "Worldwide",
+          "availableChannel": {
+            "@type": "ServiceChannel",
+            "serviceUrl": "https://justsimpleai.com/contact",
+            "serviceName": "Online Consultation"
+          }
+        }
+      ]
       }
     };
 
@@ -124,7 +124,6 @@ export default function Services({ onContactClick }: ServicesProps) {
       }
     };
   }, []);
-
   const services = [
     {
       icon: MessageCircle,
