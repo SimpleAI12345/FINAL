@@ -11,6 +11,104 @@ export default function Services({ onContactClick }: ServicesProps) {
   const gridAnimation = useScrollAnimation();
   const ctaAnimation = useScrollAnimation();
 
+  // Add Service and FAQ schema to head
+  React.useEffect(() => {
+    const serviceSchema = {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "AI Automation Services",
+      "description": "Comprehensive AI automation solutions including customer support agents, appointment setting, CRM integration, and website development.",
+      "provider": {
+        "@type": "Organization",
+        "name": "SimpleAI",
+        "url": "https://justsimpleai.com"
+      },
+      "serviceType": "AI Automation",
+      "areaServed": "Worldwide",
+      "hasOfferingCatalog": {
+          "category": "Customer Service Automation",
+          "areaServed": "Worldwide",
+          "availableChannel": {
+            "@type": "ServiceChannel",
+            "serviceUrl": "https://justsimpleai.com/contact",
+            "serviceName": "Online Consultation"
+          }
+        },
+        {
+          "@type": "Service",
+          "@id": "https://justsimpleai.com/services/ai-appointment-setting",
+          "name": "AI Appointment Setting Agents",
+          "description": "Never miss a lead with AI agents that schedule, confirm, and manage appointments automatically.",
+          "provider": {
+            "@type": "Organization",
+            "name": "SimpleAI",
+            "url": "https://justsimpleai.com"
+          },
+          "serviceType": "AI Appointment Scheduling",
+          "category": "Sales Automation",
+          "areaServed": "Worldwide",
+          "availableChannel": {
+            "@type": "ServiceChannel",
+            "serviceUrl": "https://justsimpleai.com/contact",
+            "serviceName": "Online Consultation"
+          }
+        },
+        {
+          "@type": "Service",
+          "@id": "https://justsimpleai.com/services/crm-integration",
+          "name": "CRM Integration Services",
+          "description": "Seamlessly connect your existing CRM with AI automation for streamlined lead management and improved conversion rates.",
+          "provider": {
+            "@type": "Organization",
+            "name": "SimpleAI",
+            "url": "https://justsimpleai.com"
+          },
+          "serviceType": "CRM Integration",
+          "category": "Business Process Automation",
+          "areaServed": "Worldwide",
+          "availableChannel": {
+            "@type": "ServiceChannel",
+            "serviceUrl": "https://justsimpleai.com/contact",
+            "serviceName": "Online Consultation"
+          }
+        },
+        {
+          "@type": "Service",
+          "@id": "https://justsimpleai.com/services/website-development",
+          "name": "AI-Assisted Website Development",
+          "description": "Professional, AI-assisted websites designed to convert visitors into paying customers with modern design and optimization.",
+          "provider": {
+            "@type": "Organization",
+            "name": "SimpleAI",
+            "url": "https://justsimpleai.com"
+          },
+          "serviceType": "Website Development",
+          "category": "Web Design & Development",
+          "areaServed": "Worldwide",
+          "availableChannel": {
+            "@type": "ServiceChannel",
+            "serviceUrl": "https://justsimpleai.com/contact",
+            "serviceName": "Online Consultation"
+          }
+        }
+      ]
+    };
+
+    // Add schema to head
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.textContent = JSON.stringify(serviceSchema);
+    script.id = 'services-schema';
+    document.head.appendChild(script);
+
+    // Cleanup function
+    return () => {
+      const existingScript = document.getElementById('services-schema');
+      if (existingScript) {
+        document.head.removeChild(existingScript);
+      }
+    };
+  }, []);
   const services = [
     {
       icon: MessageCircle,
