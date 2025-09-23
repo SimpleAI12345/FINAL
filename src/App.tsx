@@ -25,7 +25,7 @@ function App() {
     setCurrentPage('contact');
   };
 
-  const handleHomeClick = () => {
+  const handleBackClick = () => {
     setCurrentPage('home');
   };
 
@@ -37,8 +37,8 @@ function App() {
     setCurrentPage('terms');
   };
 
-  const handleServiceClick = (service: string) => {
-    setCurrentPage(service);
+  const handleNavigate = (page: string) => {
+    setCurrentPage(page);
   };
 
   // Handle URL routing
@@ -74,9 +74,7 @@ function App() {
   if (currentPage === 'contact') {
     return (
       <div className="min-h-screen bg-gray-50">
-        <Header onHomeClick={handleHomeClick} onContactClick={handleContactClick} />
-        <ContactPage onHomeClick={handleHomeClick} />
-        <Footer onPrivacyClick={handlePrivacyClick} onTermsClick={handleTermsClick} />
+        <ContactPage onBack={handleBackClick} />
         <ScrollToTop />
       </div>
     );
@@ -85,9 +83,7 @@ function App() {
   if (currentPage === 'privacy') {
     return (
       <div className="min-h-screen bg-gray-50">
-        <Header onHomeClick={handleHomeClick} onContactClick={handleContactClick} />
-        <PrivacyPolicy onHomeClick={handleHomeClick} />
-        <Footer onPrivacyClick={handlePrivacyClick} onTermsClick={handleTermsClick} />
+        <PrivacyPolicy onBack={handleBackClick} />
         <ScrollToTop />
       </div>
     );
@@ -96,9 +92,7 @@ function App() {
   if (currentPage === 'terms') {
     return (
       <div className="min-h-screen bg-gray-50">
-        <Header onHomeClick={handleHomeClick} onContactClick={handleContactClick} />
-        <TermsOfService onHomeClick={handleHomeClick} />
-        <Footer onPrivacyClick={handlePrivacyClick} onTermsClick={handleTermsClick} />
+        <TermsOfService onBack={handleBackClick} />
         <ScrollToTop />
       </div>
     );
@@ -107,9 +101,7 @@ function App() {
   if (currentPage === 'ai-automation') {
     return (
       <div className="min-h-screen bg-gray-50">
-        <Header onHomeClick={handleHomeClick} onContactClick={handleContactClick} />
-        <AIAutomationPage onContactClick={handleContactClick} onServiceClick={handleServiceClick} />
-        <Footer onPrivacyClick={handlePrivacyClick} onTermsClick={handleTermsClick} />
+        <AIAutomationPage onBack={handleBackClick} onNavigate={handleNavigate} onContactClick={handleContactClick} />
         <ScrollToTop />
       </div>
     );
@@ -118,9 +110,7 @@ function App() {
   if (currentPage === 'ai-customer-support') {
     return (
       <div className="min-h-screen bg-gray-50">
-        <Header onHomeClick={handleHomeClick} onContactClick={handleContactClick} />
-        <AICustomerSupportPage onContactClick={handleContactClick} onServiceClick={handleServiceClick} />
-        <Footer onPrivacyClick={handlePrivacyClick} onTermsClick={handleTermsClick} />
+        <AICustomerSupportPage onBack={handleBackClick} onNavigate={handleNavigate} onContactClick={handleContactClick} />
         <ScrollToTop />
       </div>
     );
@@ -129,9 +119,7 @@ function App() {
   if (currentPage === 'ai-crm-integration') {
     return (
       <div className="min-h-screen bg-gray-50">
-        <Header onHomeClick={handleHomeClick} onContactClick={handleContactClick} />
-        <AICRMIntegrationPage onContactClick={handleContactClick} onServiceClick={handleServiceClick} />
-        <Footer onPrivacyClick={handlePrivacyClick} onTermsClick={handleTermsClick} />
+        <AICRMIntegrationPage onBack={handleBackClick} onNavigate={handleNavigate} onContactClick={handleContactClick} />
         <ScrollToTop />
       </div>
     );
@@ -140,9 +128,7 @@ function App() {
   if (currentPage === 'ai-for-clinics') {
     return (
       <div className="min-h-screen bg-gray-50">
-        <Header onHomeClick={handleHomeClick} onContactClick={handleContactClick} />
-        <AIForClinicsPage onContactClick={handleContactClick} onServiceClick={handleServiceClick} />
-        <Footer onPrivacyClick={handlePrivacyClick} onTermsClick={handleTermsClick} />
+        <AIForClinicsPage onBack={handleBackClick} onNavigate={handleNavigate} onContactClick={handleContactClick} />
         <ScrollToTop />
       </div>
     );
@@ -151,9 +137,7 @@ function App() {
   if (currentPage === 'ai-appointment-setting') {
     return (
       <div className="min-h-screen bg-gray-50">
-        <Header onHomeClick={handleHomeClick} onContactClick={handleContactClick} />
-        <AIAppointmentSettingPage onContactClick={handleContactClick} onServiceClick={handleServiceClick} />
-        <Footer onPrivacyClick={handlePrivacyClick} onTermsClick={handleTermsClick} />
+        <AIAppointmentSettingPage onBack={handleBackClick} onNavigate={handleNavigate} onContactClick={handleContactClick} />
         <ScrollToTop />
       </div>
     );
@@ -161,12 +145,12 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header onHomeClick={handleHomeClick} onContactClick={handleContactClick} />
+      <Header onContactClick={handleContactClick} onTermsClick={handleTermsClick} />
       <Hero onContactClick={handleContactClick} />
       <PainPoints />
       <Services onContactClick={handleContactClick} />
       <About />
-      <HowItWorks />
+      <HowItWorks onContactClick={handleContactClick} />
       <Authority />
       <CallToAction onContactClick={handleContactClick} />
       <Footer onPrivacyClick={handlePrivacyClick} onTermsClick={handleTermsClick} />
