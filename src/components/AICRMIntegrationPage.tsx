@@ -1,359 +1,223 @@
 import React from 'react';
-import { ArrowLeft, Database, TrendingUp, Users, CheckCircle, ArrowRight } from 'lucide-react';
+import { MessageCircle, Calendar, Globe, Database, ArrowRight } from 'lucide-react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
-interface AICRMIntegrationPageProps {
-  onBack: () => void;
-  onNavigate: (page: string) => void;
+interface ServicesProps {
   onContactClick: () => void;
 }
 
-export default function AICRMIntegrationPage({ onBack, onNavigate, onContactClick }: AICRMIntegrationPageProps) {
-  const heroAnimation = useScrollAnimation();
-  const problemAnimation = useScrollAnimation();
-  const solutionAnimation = useScrollAnimation();
-  const benefitsAnimation = useScrollAnimation();
-  const integrationsAnimation = useScrollAnimation();
-  const faqAnimation = useScrollAnimation();
+export default function Services({ onContactClick }: ServicesProps) {
+  const titleAnimation = useScrollAnimation();
+  const gridAnimation = useScrollAnimation();
   const ctaAnimation = useScrollAnimation();
 
+  // Add Service and FAQ schema to head
   React.useEffect(() => {
-    const schema = {
+    const serviceSchema = {
       "@context": "https://schema.org",
       "@type": "Service",
-      "name": "AI & CRM Integration",
-      "description": "Intelligent CRM automation that streamlines lead management, improves data quality, and increases conversion rates through AI-powered workflows.",
+      "name": "AI Automation Services",
+      "description": "Comprehensive AI automation solutions including customer support agents, appointment setting, CRM integration, and website development.",
       "provider": {
         "@type": "Organization",
         "name": "SimpleAI",
         "url": "https://justsimpleai.com"
       },
-      "serviceType": "CRM Integration and Automation",
+      "serviceType": "AI Automation",
       "areaServed": "Worldwide",
-      "offers": {
-        "@type": "Offer",
-        "description": "AI-powered CRM integration and automation",
-        "availability": "https://schema.org/InStock"
+      "hasOfferingCatalog": {
+        "@type": "OfferingCatalog",
+        "name": "AI Automation Services",
+        "itemListElement": [
+        {
+          "@type": "Service",
+          "@id": "https://justsimpleai.com/services/ai-customer-support",
+          "name": "AI Customer Support Agents",
+          "description": "Available 24/7, instantly resolving customer queries, freeing your team for high-value work.",
+          "provider": {
+            "@type": "Organization",
+            "name": "SimpleAI",
+            "url": "https://justsimpleai.com"
+          },
+          "serviceType": "AI Customer Support",
+          "category": "Customer Service Automation",
+          "areaServed": "Worldwide",
+          "availableChannel": {
+            "@type": "ServiceChannel",
+            "serviceUrl": "https://justsimpleai.com/contact",
+            "serviceName": "Online Consultation"
+          }
+        },
+        {
+          "@type": "Service",
+          "@id": "https://justsimpleai.com/services/ai-appointment-setting",
+          "name": "AI Appointment Setting Agents",
+          "description": "Never miss a lead with AI agents that schedule, confirm, and manage appointments automatically.",
+          "provider": {
+            "@type": "Organization",
+            "name": "SimpleAI",
+            "url": "https://justsimpleai.com"
+          },
+          "serviceType": "AI Appointment Scheduling",
+          "category": "Sales Automation",
+          "areaServed": "Worldwide",
+          "availableChannel": {
+            "@type": "ServiceChannel",
+            "serviceUrl": "https://justsimpleai.com/contact",
+            "serviceName": "Online Consultation"
+          }
+        },
+        {
+          "@type": "Service",
+          "@id": "https://justsimpleai.com/services/crm-integration",
+          "name": "CRM Integration Services",
+          "description": "Seamlessly connect your existing CRM with AI automation for streamlined lead management and improved conversion rates.",
+          "provider": {
+            "@type": "Organization",
+            "name": "SimpleAI",
+            "url": "https://justsimpleai.com"
+          },
+          "serviceType": "CRM Integration",
+          "category": "Business Process Automation",
+          "areaServed": "Worldwide",
+          "availableChannel": {
+            "@type": "ServiceChannel",
+            "serviceUrl": "https://justsimpleai.com/contact",
+            "serviceName": "Online Consultation"
+          }
+        },
+        {
+          "@type": "Service",
+          "@id": "https://justsimpleai.com/services/website-development",
+          "name": "AI-Assisted Website Development",
+          "description": "Professional, AI-assisted websites designed to convert visitors into paying customers with modern design and optimization.",
+          "provider": {
+            "@type": "Organization",
+            "name": "SimpleAI",
+            "url": "https://justsimpleai.com"
+          },
+          "serviceType": "Website Development",
+          "category": "Web Design & Development",
+          "areaServed": "Worldwide",
+          "availableChannel": {
+            "@type": "ServiceChannel",
+            "serviceUrl": "https://justsimpleai.com/contact",
+            "serviceName": "Online Consultation"
+          }
+        }
+      ]
       }
     };
 
+    // Add schema to head
     const script = document.createElement('script');
     script.type = 'application/ld+json';
-    script.textContent = JSON.stringify(schema);
-    script.id = 'ai-crm-integration-schema';
+    script.textContent = JSON.stringify(serviceSchema);
+    script.id = 'services-schema';
     document.head.appendChild(script);
 
+    // Cleanup function
     return () => {
-      const existingScript = document.getElementById('ai-crm-integration-schema');
+      const existingScript = document.getElementById('services-schema');
       if (existingScript) {
         document.head.removeChild(existingScript);
       }
     };
   }, []);
 
-  const benefits = [
-    { icon: TrendingUp, title: "50% Higher Conversion", description: "AI-powered lead scoring and nurturing" },
-    { icon: Database, title: "Clean, Organized Data", description: "Automated data entry and deduplication" },
-    { icon: Users, title: "Better Lead Management", description: "Intelligent routing and follow-up" }
-  ];
-
-  const integrations = [
-    "Salesforce", "HubSpot", "Pipedrive", "Zoho CRM", "Monday.com", "ActiveCampaign", "Mailchimp", "Zapier", "Microsoft Dynamics"
-  ];
-
-  const faqs = [
+  const services = [
     {
-      question: "Which CRM systems do you integrate with?",
-      answer: "We integrate with all major CRM platforms including Salesforce, HubSpot, Pipedrive, Zoho, and many others. Custom integrations are also available."
+      icon: MessageCircle,
+      title: 'AI Customer Support Agents',
+      description: 'Available 24/7, instantly resolving customer queries, freeing your team for high-value work.',
+      cta: 'See Customer Support in Action'
     },
     {
-      question: "How does AI improve CRM data quality?",
-      answer: "AI automatically cleanses data, removes duplicates, standardizes formats, and enriches records with additional information from various sources."
+      icon: Calendar,
+      title: 'AI Appointment Setting Agents',
+      description: 'Never miss a lead — our AI agents schedule, confirm, and manage appointments automatically.',
+      cta: 'Book More Calls with AI'
     },
     {
-      question: "Can AI help with lead scoring?",
-      answer: "Yes, our AI analyzes lead behavior, demographics, and engagement to provide accurate lead scores and prioritize your sales efforts."
+      icon: Database,
+      title: 'CRM Integration',
+      description: 'Seamlessly connect your existing CRM with AI automation for streamlined lead management.',
+      cta: 'Optimize Your CRM'
     },
     {
-      question: "What about data security and privacy?",
-      answer: "We follow enterprise-grade security standards with encryption, access controls, and compliance with GDPR, CCPA, and other privacy regulations."
+      icon: Globe,
+      title: 'Website Build & Design',
+      description: 'Professional, AI-assisted websites designed to convert visitors into paying customers.',
+      cta: 'See Our Website Solutions'
     }
   ];
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Header */}
-      <div className="bg-white border-b border-gray-100 py-4">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <button
-            onClick={onBack}
-            className="flex items-center text-gray-600 hover:text-gray-900 transition-colors"
+    <section id="services" className="py-12 sm:py-16 lg:py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div 
+          ref={titleAnimation.ref}
+          className={`text-center mb-16 animate-fade-in-up ${titleAnimation.isVisible ? 'visible' : ''}`}
+        >
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Our Services
+          </h2>
+          <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto px-4">
+            Comprehensive AI automation solutions to streamline your business operations
+          </p>
+        </div>
+
+        <div 
+          ref={gridAnimation.ref}
+          className={`grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-12 animate-fade-in-up items-stretch ${gridAnimation.isVisible ? 'visible' : ''}`}
+        >
+          {services.map((service, index) => {
+            const IconComponent = service.icon;
+            return (
+              <div
+                key={index}
+                className={`bg-white p-6 sm:p-8 rounded-lg shadow-lg border border-gray-100 hover:shadow-xl transition-shadow group animate-fade-in-up animate-stagger-${index + 1} ${gridAnimation.isVisible ? 'visible' : ''} flex flex-col justify-between h-full min-h-[320px]`}
+              >
+                <div className="flex-shrink-0">
+                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-6 group-hover:bg-green-200 transition-colors">
+                    <IconComponent className="w-6 h-6 text-green-500" />
+                  </div>
+                  <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4">
+                    {service.title}
+                  </h3>
+                  <p className="text-sm sm:text-base text-gray-600 mb-6 leading-relaxed">
+                    {service.description}
+                  </p>
+                </div>
+                <div className="flex-shrink-0 mt-auto">
+                  <button 
+                    onClick={onContactClick}
+                    className="text-green-500 font-medium hover:text-green-700 transition-colors flex items-center gap-2 group text-sm sm:text-base"
+                  >
+                    {service.cta}
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <div 
+          ref={ctaAnimation.ref}
+          className={`text-center animate-fade-in-up ${ctaAnimation.isVisible ? 'visible' : ''}`}
+        >
+          <p className="text-base sm:text-lg text-gray-600 mb-6 px-4">
+            Looking for a custom AI solution? Let's talk.
+          </p>
+          <button 
+            onClick={onContactClick}
+            className="bg-green-500 text-white px-6 sm:px-8 py-3 rounded-lg hover:bg-green-700 transition-colors font-medium"
           >
-            <ArrowLeft className="w-5 h-5 mr-2" />
-            Back to Home
+            Contact Us
           </button>
         </div>
       </div>
-
-      {/* Hero Section */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-white to-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div 
-            ref={heroAnimation.ref}
-            className={`text-center animate-fade-in-up ${heroAnimation.isVisible ? 'visible' : ''}`}
-          >
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
-              AI & CRM Integration
-            </h1>
-            <p className="text-lg sm:text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-              Transform your CRM into an intelligent sales machine with AI automation that manages leads, nurtures prospects, and closes more deals.
-            </p>
-            <button
-              onClick={onContactClick}
-              className="bg-green-500 text-white px-8 py-4 rounded-lg font-medium hover:bg-green-700 transition-colors text-lg shadow-lg"
-            >
-              Supercharge Your CRM
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Problem Section */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-red-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div 
-            ref={problemAnimation.ref}
-            className={`animate-fade-in-up ${problemAnimation.isVisible ? 'visible' : ''}`}
-          >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-8 text-center">
-              Your CRM Is Costing You Sales
-            </h2>
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div>
-                <p className="text-lg text-gray-700 mb-6">
-                  Manual data entry errors, missed follow-ups, and poor lead prioritization are killing your conversion rates. Your sales team spends more time managing the CRM than actually selling.
-                </p>
-                <p className="text-lg text-gray-700 mb-6">
-                  Duplicate records, incomplete information, and inconsistent processes create chaos instead of clarity. Hot leads go cold while your team struggles with administrative tasks.
-                </p>
-                <p className="text-lg text-gray-700">
-                  Without intelligent automation, your CRM becomes a data graveyard instead of a sales accelerator.
-                </p>
-              </div>
-              <div className="bg-white p-8 rounded-xl shadow-lg">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">The Hidden Costs:</h3>
-                <ul className="space-y-3">
-                  <li className="flex items-start">
-                    <span className="text-red-500 mr-3">•</span>
-                    <span>27% of leads never get followed up</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-red-500 mr-3">•</span>
-                    <span>Sales reps spend 65% of time on admin tasks</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-red-500 mr-3">•</span>
-                    <span>Poor data quality costs $15M annually</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-red-500 mr-3">•</span>
-                    <span>Inconsistent processes reduce close rates by 40%</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Solution Section */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div 
-            ref={solutionAnimation.ref}
-            className={`animate-fade-in-up ${solutionAnimation.isVisible ? 'visible' : ''}`}
-          >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-8 text-center">
-              Intelligent CRM Automation
-            </h2>
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">AI-Powered Sales Engine</h3>
-                <p className="text-lg text-gray-700 mb-6">
-                  Our AI integration transforms your CRM from a passive database into an active sales assistant. Automated lead scoring, intelligent routing, and personalized nurturing campaigns work 24/7 to move prospects through your pipeline.
-                </p>
-                <p className="text-lg text-gray-700 mb-6">
-                  Advanced machine learning analyzes customer behavior, predicts buying intent, and suggests the best actions for each lead, ensuring no opportunity is missed.
-                </p>
-                <div className="space-y-4">
-                  <div className="flex items-center">
-                    <CheckCircle className="text-green-500 mr-3" size={20} />
-                    <span>Automated lead scoring and prioritization</span>
-                  </div>
-                  <div className="flex items-center">
-                    <CheckCircle className="text-green-500 mr-3" size={20} />
-                    <span>Intelligent data cleansing and enrichment</span>
-                  </div>
-                  <div className="flex items-center">
-                    <CheckCircle className="text-green-500 mr-3" size={20} />
-                    <span>Personalized nurturing sequences</span>
-                  </div>
-                </div>
-              </div>
-              <div className="bg-gray-50 p-8 rounded-xl">
-                <h4 className="text-lg font-bold text-gray-900 mb-4">AI CRM Features:</h4>
-                <ul className="space-y-3">
-                  <li>• Automatic lead capture and qualification</li>
-                  <li>• Smart lead routing to best sales rep</li>
-                  <li>• Predictive analytics and forecasting</li>
-                  <li>• Automated follow-up sequences</li>
-                  <li>• Deal progression tracking and alerts</li>
-                  <li>• Customer behavior analysis</li>
-                  <li>• Performance reporting and insights</li>
-                  <li>• Integration with marketing automation</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Benefits Section */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-green-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div 
-            ref={benefitsAnimation.ref}
-            className={`animate-fade-in-up ${benefitsAnimation.isVisible ? 'visible' : ''}`}
-          >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-12 text-center">
-              Measurable Sales Results
-            </h2>
-            <div className="grid md:grid-cols-3 gap-8">
-              {benefits.map((benefit, index) => (
-                <div key={index} className="bg-white p-8 rounded-xl shadow-lg text-center">
-                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <benefit.icon className="text-green-500" size={32} />
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">{benefit.title}</h3>
-                  <p className="text-gray-600">{benefit.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Integrations Section */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div 
-            ref={integrationsAnimation.ref}
-            className={`text-center animate-fade-in-up ${integrationsAnimation.isVisible ? 'visible' : ''}`}
-          >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-8">
-              Works With Your CRM
-            </h2>
-            <p className="text-lg text-gray-600 mb-12 max-w-3xl mx-auto">
-              Seamless integration with all major CRM platforms and sales tools.
-            </p>
-            <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-9 gap-4">
-              {integrations.map((integration, index) => (
-                <div key={index} className="bg-gray-50 p-4 rounded-lg text-center">
-                  <span className="text-sm font-medium text-gray-700">{integration}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div 
-            ref={faqAnimation.ref}
-            className={`animate-fade-in-up ${faqAnimation.isVisible ? 'visible' : ''}`}
-          >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-12 text-center">
-              CRM Integration Questions
-            </h2>
-            <div className="space-y-6">
-              {faqs.map((faq, index) => (
-                <div key={index} className="bg-white p-6 rounded-xl shadow-sm">
-                  <h3 className="text-lg font-bold text-gray-900 mb-3">{faq.question}</h3>
-                  <p className="text-gray-700">{faq.answer}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Related Services */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8 text-center">
-            Complete Your Sales Automation
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <button
-              onClick={() => onNavigate('ai-automation')}
-              className="bg-gray-50 p-6 rounded-xl hover:bg-gray-100 transition-colors text-left group"
-            >
-              <h3 className="font-bold text-gray-900 mb-2 group-hover:text-green-600">AI Automation</h3>
-              <p className="text-sm text-gray-600">Complete business automation</p>
-              <ArrowRight className="text-green-500 mt-2 group-hover:translate-x-1 transition-transform" size={16} />
-            </button>
-            <button
-              onClick={() => onNavigate('ai-customer-support')}
-              className="bg-gray-50 p-6 rounded-xl hover:bg-gray-100 transition-colors text-left group"
-            >
-              <h3 className="font-bold text-gray-900 mb-2 group-hover:text-green-600">AI Customer Support</h3>
-              <p className="text-sm text-gray-600">24/7 automated support</p>
-              <ArrowRight className="text-green-500 mt-2 group-hover:translate-x-1 transition-transform" size={16} />
-            </button>
-            <button
-              onClick={() => onNavigate('ai-appointment-setting')}
-              className="bg-gray-50 p-6 rounded-xl hover:bg-gray-100 transition-colors text-left group"
-            >
-              <h3 className="font-bold text-gray-900 mb-2 group-hover:text-green-600">AI Appointment Setting</h3>
-              <p className="text-sm text-gray-600">Automated scheduling</p>
-              <ArrowRight className="text-green-500 mt-2 group-hover:translate-x-1 transition-transform" size={16} />
-            </button>
-            <button
-              onClick={() => onNavigate('ai-for-clinics')}
-              className="bg-gray-50 p-6 rounded-xl hover:bg-gray-100 transition-colors text-left group"
-            >
-              <h3 className="font-bold text-gray-900 mb-2 group-hover:text-green-600">AI for Clinics</h3>
-              <p className="text-sm text-gray-600">Healthcare automation</p>
-              <ArrowRight className="text-green-500 mt-2 group-hover:translate-x-1 transition-transform" size={16} />
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-r from-green-500 to-green-700">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div 
-            ref={ctaAnimation.ref}
-            className={`animate-fade-in-up ${ctaAnimation.isVisible ? 'visible' : ''}`}
-          >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-6">
-              Ready to Close More Deals?
-            </h2>
-            <p className="text-lg sm:text-xl text-green-100 mb-8">
-              Transform your CRM into an intelligent sales machine that works 24/7.
-            </p>
-            <button
-              onClick={onContactClick}
-              className="bg-white text-green-500 px-8 py-4 rounded-lg font-medium hover:bg-gray-100 transition-colors text-lg shadow-lg"
-            >
-              Get CRM AI Integration
-            </button>
-          </div>
-        </div>
-      </section>
-    </div>
+    </section>
   );
 }
