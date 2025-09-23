@@ -26,6 +26,59 @@
     <meta name="twitter:description" content="AI agents for automation, customer support and CRM. Faster responses, lower costs, more conversions. Transform your business today." />
     <meta name="twitter:image" content="https://justsimpleai.com/og-image.jpg" />
     
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://justsimpleai.com/#organization",
+          "name": "SimpleAI",
+          "url": "https://justsimpleai.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://justsimpleai.com/simpleai-logo.svg",
+            "width": 200,
+            "height": 60
+          },
+          "description": "AI automation solutions for customer support, appointment setting, and CRM integration",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "email": "info@justsimpleai.com",
+            "contactType": "customer service"
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Poljana Dragutina Kalea 12",
+            "addressCountry": "HR"
+          },
+          "foundingDate": "2025",
+          "sameAs": []
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://justsimpleai.com/#website",
+          "url": "https://justsimpleai.com",
+          "name": "SimpleAI - AI Automation & Customer Support",
+          "description": "AI agents for automation, customer support and CRM. Faster responses, lower costs, more conversions.",
+          "publisher": {
+            "@id": "https://justsimpleai.com/#organization"
+          },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://justsimpleai.com/?q={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+          },
+          "inLanguage": "en-US"
+        }
+      ]
+    }
+    </script>
+    
     <script type="text/javascript">
       (function(d, t) {
           var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
