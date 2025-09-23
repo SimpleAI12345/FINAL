@@ -182,6 +182,7 @@ export default function ContactPage({ onBack }: ContactPageProps) {
                   <option value="ai-customer-support">AI Customer Support Agents</option>
                   <option value="ai-appointment-setting">AI Appointment Setting Agents</option>
                   <option value="website-build-design">Website Build & Design</option>
+                  <option value="crm-integration">CRM Integration</option>
                 </select>
               </div>
             </div>

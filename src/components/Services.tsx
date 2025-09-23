@@ -1,5 +1,5 @@
 import React from 'react';
-import { MessageCircle, Calendar, Globe, ArrowRight } from 'lucide-react';
+import { MessageCircle, Calendar, Globe, Database, ArrowRight } from 'lucide-react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 interface ServicesProps {
@@ -29,6 +29,12 @@ export default function Services({ onContactClick }: ServicesProps) {
       title: 'Website Build & Design',
       description: 'Professional, AI-assisted websites designed to convert visitors into paying customers.',
       cta: 'See Our Website Solutions →'
+    },
+    {
+      icon: Database,
+      title: 'CRM Integration',
+      description: 'Seamlessly connect your existing CRM with AI automation for streamlined lead management.',
+      cta: 'Optimize Your CRM →'
     }
   ];
 
@@ -49,7 +55,7 @@ export default function Services({ onContactClick }: ServicesProps) {
 
         <div 
           ref={gridAnimation.ref}
-          className={`grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-12 animate-fade-in-up ${gridAnimation.isVisible ? 'visible' : ''}`}
+          className={`grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-12 animate-fade-in-up ${gridAnimation.isVisible ? 'visible' : ''}`}
         >
           {services.map((service, index) => {
             const IconComponent = service.icon;
