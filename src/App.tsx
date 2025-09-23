@@ -18,6 +18,35 @@ type Page = 'home' | 'contact' | 'privacy' | 'terms';
 function App() {
   const [currentPage, setCurrentPage] = useState<Page>('home');
 
+  // Update page title and meta description based on current page
+  React.useEffect(() => {
+    const updatePageMeta = () => {
+      switch (currentPage) {
+        case 'contact':
+          document.title = 'Contact Us - Get AI Automation Quote | SimpleAI';
+          document.querySelector('meta[name="description"]')?.setAttribute('content', 
+            'Contact SimpleAI for AI automation solutions. Get quotes for customer support agents, appointment setting, and CRM integration services.');
+          break;
+        case 'privacy':
+          document.title = 'Privacy Policy | SimpleAI';
+          document.querySelector('meta[name="description"]')?.setAttribute('content', 
+            'SimpleAI Privacy Policy. Learn how we collect, use, and protect your personal data when using our AI automation services.');
+          break;
+        case 'terms':
+          document.title = 'Terms of Service | SimpleAI';
+          document.querySelector('meta[name="description"]')?.setAttribute('content', 
+            'SimpleAI Terms of Service. Review our terms and conditions for AI automation services, customer support agents, and CRM integration.');
+          break;
+        default:
+          document.title = 'AI Automation & Customer Support | SimpleAI';
+          document.querySelector('meta[name="description"]')?.setAttribute('content', 
+            'AI agents for automation, customer support and CRM. Faster responses, lower costs, more conversions. Transform your business today.');
+      }
+    };
+
+    updatePageMeta();
+  }, [currentPage]);
+
   const handleContactClick = () => {
     setCurrentPage('contact');
   };
