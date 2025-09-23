@@ -25,7 +25,18 @@ export default function Services({ onContactClick }: ServicesProps) {
       },
       "serviceType": "AI Automation",
       "areaServed": "Worldwide",
-      "hasOfferingCatalog": {
+      "hasOfferingCatalog": [
+        {
+          "@type": "Service",
+          "@id": "https://justsimpleai.com/services/ai-customer-support",
+          "name": "AI Customer Support Agents",
+          "description": "Available 24/7, instantly resolving customer queries, freeing your team for high-value work.",
+          "provider": {
+            "@type": "Organization",
+            "name": "SimpleAI",
+            "url": "https://justsimpleai.com"
+          },
+          "serviceType": "AI Customer Support",
           "category": "Customer Service Automation",
           "areaServed": "Worldwide",
           "availableChannel": {
