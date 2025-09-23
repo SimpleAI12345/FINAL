@@ -25,18 +25,22 @@ export default function Services({ onContactClick }: ServicesProps) {
       },
       "serviceType": "AI Automation",
       "areaServed": "Worldwide",
-      "hasOfferingCatalog": [
-        {
-          "@type": "Service",
-          "@id": "https://justsimpleai.com/services/ai-customer-support",
-          "name": "AI Customer Support Agents",
-          "description": "Available 24/7, instantly resolving customer queries, freeing your team for high-value work.",
-          "provider": {
-            "@type": "Organization",
-            "name": "SimpleAI",
-            "url": "https://justsimpleai.com"
-          },
-          "serviceType": "AI Customer Support",
+      "hasOfferingCatalog": {
+  // Add Service and FAQ schema to head
+  React.useEffect(() => {
+    const serviceSchema = {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "AI Automation Services",
+      "description": "Comprehensive AI automation solutions including customer support agents, appointment setting, CRM integration, and website development.",
+      "provider": {
+        "@type": "Organization",
+        "name": "SimpleAI",
+        "url": "https://justsimpleai.com"
+      },
+      "serviceType": "AI Automation",
+      "areaServed": "Worldwide",
+      "hasOfferingCatalog": {
           "category": "Customer Service Automation",
           "areaServed": "Worldwide",
           "availableChannel": {
