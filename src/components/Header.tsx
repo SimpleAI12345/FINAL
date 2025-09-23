@@ -1,88 +1,248 @@
 import React from 'react';
-import { Menu, X } from 'lucide-react';
+import { MessageCircle, Calendar, Globe, Database, ArrowRight } from 'lucide-react';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
-interface HeaderProps {
+interface ServicesProps {
   onContactClick: () => void;
-  onTermsClick: () => void;
 }
 
-export default function Header({ onContactClick, onTermsClick }: HeaderProps) {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+export default function Services({ onContactClick }: ServicesProps) {
+  const titleAnimation = useScrollAnimation();
+  const gridAnimation = useScrollAnimation();
+  const ctaAnimation = useScrollAnimation();
 
-  const navigationItems = [
-    { name: 'Services', href: '#services' },
-    { name: 'About Us', href: '#about' },
+  // Add Service and FAQ schema to head
+  React.useEffect(() => {
+    const serviceSchema = {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "AI Automation Services",
+      "description": "Comprehensive AI automation solutions including customer support agents, appointment setting, CRM integration, and website development.",
+      "provider": {
+        "@type": "Organization",
+        "name": "SimpleAI",
+        "url": "https://justsimpleai.com"
+      },
+      "serviceType": "AI Automation",
+      "areaServed": "Worldwide",
+      "hasOfferingCatalog": {
+  // Add Service and FAQ schema to head
+  React.useEffect(() => {
+    const serviceSchema = {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "AI Automation Services",
+      "description": "Comprehensive AI automation solutions including customer support agents, appointment setting, CRM integration, and website development.",
+      "provider": {
+        "@type": "Organization",
+        "name": "SimpleAI",
+        "url": "https://justsimpleai.com"
+      },
+      "serviceType": "AI Automation",
+      "areaServed": "Worldwide",
+      "hasOfferingCatalog": {
+        "@type": "OfferingCatalog",
+        "name": "AI Automation Services",
+        "itemListElement": [
+        {
+          "@type": "Service",
+          "@id": "https://justsimpleai.com/services/ai-customer-support",
+          "name": "AI Customer Support Agents",
+          "description": "Available 24/7, instantly resolving customer queries, freeing your team for high-value work.",
+          "provider": {
+            "@type": "Organization",
+            "name": "SimpleAI",
+            "url": "https://justsimpleai.com"
+          },
+          "serviceType": "AI Customer Support",
+          "category": "Customer Service Automation",
+          "areaServed": "Worldwide",
+          "availableChannel": {
+            "@type": "ServiceChannel",
+            "serviceUrl": "https://justsimpleai.com/contact",
+            "serviceName": "Online Consultation"
+          }
+        },
+        {
+          "@type": "Service",
+          "@id": "https://justsimpleai.com/services/ai-appointment-setting",
+          "name": "AI Appointment Setting Agents",
+          "description": "Never miss a lead with AI agents that schedule, confirm, and manage appointments automatically.",
+          "provider": {
+            "@type": "Organization",
+            "name": "SimpleAI",
+            "url": "https://justsimpleai.com"
+          },
+          "serviceType": "AI Appointment Scheduling",
+          "category": "Sales Automation",
+          "areaServed": "Worldwide",
+          "availableChannel": {
+            "@type": "ServiceChannel",
+            "serviceUrl": "https://justsimpleai.com/contact",
+            "serviceName": "Online Consultation"
+          }
+        },
+        {
+          "@type": "Service",
+          "@id": "https://justsimpleai.com/services/crm-integration",
+          "name": "CRM Integration Services",
+          "description": "Seamlessly connect your existing CRM with AI automation for streamlined lead management and improved conversion rates.",
+          "provider": {
+            "@type": "Organization",
+            "name": "SimpleAI",
+            "url": "https://justsimpleai.com"
+          },
+          "serviceType": "CRM Integration",
+          "category": "Business Process Automation",
+          "areaServed": "Worldwide",
+          "availableChannel": {
+            "@type": "ServiceChannel",
+            "serviceUrl": "https://justsimpleai.com/contact",
+            "serviceName": "Online Consultation"
+          }
+        },
+        {
+          "@type": "Service",
+          "@id": "https://justsimpleai.com/services/website-development",
+          "name": "AI-Assisted Website Development",
+          "description": "Professional, AI-assisted websites designed to convert visitors into paying customers with modern design and optimization.",
+          "provider": {
+            "@type": "Organization",
+            "name": "SimpleAI",
+            "url": "https://justsimpleai.com"
+          },
+          "serviceType": "Website Development",
+          "category": "Web Design & Development",
+          "areaServed": "Worldwide",
+          "availableChannel": {
+            "@type": "ServiceChannel",
+            "serviceUrl": "https://justsimpleai.com/contact",
+            "serviceName": "Online Consultation"
+          }
+        }
+      ]
+      }
+    };
+
+    // Add schema to head
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.textContent = JSON.stringify(serviceSchema);
+    script.id = 'services-schema';
+    document.head.appendChild(script);
+
+    // Cleanup function
+    return () => {
+      const existingScript = document.getElementById('services-schema');
+      if (existingScript) {
+        document.head.removeChild(existingScript);
+      }
+    };
+  }, []);
+
+  const services = [
+    {
+      icon: MessageCircle,
+      title: 'AI Customer Support Agents',
+      description: 'Available 24/7, instantly resolving customer queries, freeing your team for high-value work.',
+      cta: 'See Customer Support in Action'
+    },
+    {
+      icon: Calendar,
+      title: 'AI Appointment Setting Agents',
+      description: 'Never miss a lead — our AI agents schedule, confirm, and manage appointments automatically.',
+      cta: 'Book More Calls with AI'
+    },
+    {
+      icon: Database,
+      title: 'CRM Integration',
+      description: 'Seamlessly connect your existing CRM with AI automation for streamlined lead management.',
+      cta: 'Optimize Your CRM'
+    },
+    {
+      icon: Globe,
+      title: 'Website Build & Design',
+      description: 'Professional, AI-assisted websites designed to convert visitors into paying customers.',
+      cta: 'See Our Website Solutions'
+    }
   ];
 
-  const scrollToSection = (href: string) => {
-    const sectionId = href.replace('#', '');
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
-    <header className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-b border-gray-100 z-50">
+    <section id="services" className="py-12 sm:py-16 lg:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <div className="flex items-center">
-            <div className="text-2xl font-bold text-gray-900">
-              Simple<span className="text-green-600">AI</span>
-            </div>
-          </div>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8">
-            {navigationItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection(item.href);
-                }}
-                className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200"
-              >
-                {item.name}
-              </a>
-            ))}
-          </nav>
-
-          {/* Mobile menu button */}
-          <div className="lg:hidden">
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-600 hover:text-gray-900"
-            >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
+        <div 
+          ref={titleAnimation.ref}
+          className={`text-center mb-16 animate-fade-in-up ${titleAnimation.isVisible ? 'visible' : ''}`}
+        >
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Our Services
+          </h2>
+          <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto px-4">
+            Comprehensive AI automation solutions to streamline your business operations
+          </p>
         </div>
 
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="lg:hidden bg-white border-t border-gray-100">
-            <div className="px-2 pt-2 pb-3 space-y-1">
-              {navigationItems.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection(item.href);
-                    setIsMenuOpen(false);
-                  }}
-                  className="block px-3 py-2 text-gray-600 hover:text-gray-900 font-medium"
-                >
-                  {item.name}
-                </a>
-              ))}
-            </div>
-          </div>
-        )}
+        <div 
+          ref={gridAnimation.ref}
+          className={`grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-12 animate-fade-in-up items-stretch ${gridAnimation.isVisible ? 'visible' : ''}`}
+        >
+          {services.map((service, index) => {
+            const IconComponent = service.icon;
+            return (
+                  if (currentPage !== 'home') {
+                    onNavigate('home');
+                    setTimeout(() => scrollToSection(item.href), 100);
+                  } else {
+                    if (currentPage !== 'home') {
+                      onNavigate('home');
+                      setTimeout(() => scrollToSection(item.href), 100);
+                    } else {
+                      scrollToSection(item.href);
+                    }
+                  }
+                key={index}
+                className={`bg-white p-6 sm:p-8 rounded-lg shadow-lg border border-gray-100 hover:shadow-xl transition-shadow group animate-fade-in-up animate-stagger-${index + 1} ${gridAnimation.isVisible ? 'visible' : ''} flex flex-col justify-between h-full min-h-[320px]`}
+              >
+                <div className="flex-shrink-0">
+                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-6 group-hover:bg-green-200 transition-colors">
+                    <IconComponent className="w-6 h-6 text-green-500" />
+                  </div>
+                  <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4">
+                    {service.title}
+                  </h3>
+                  <p className="text-sm sm:text-base text-gray-600 mb-6 leading-relaxed">
+                    {service.description}
+                  </p>
+                </div>
+                <div className="flex-shrink-0 mt-auto">
+                  <button 
+                    onClick={onContactClick}
+                    className="text-green-500 font-medium hover:text-green-700 transition-colors flex items-center gap-2 group text-sm sm:text-base"
+                  >
+                    {service.cta}
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <div 
+          ref={ctaAnimation.ref}
+          className={`text-center animate-fade-in-up ${ctaAnimation.isVisible ? 'visible' : ''}`}
+        >
+          <p className="text-base sm:text-lg text-gray-600 mb-6 px-4">
+            Looking for a custom AI solution? Let's talk.
+          </p>
+          <button 
+            onClick={onContactClick}
+            className="bg-green-500 text-white px-6 sm:px-8 py-3 rounded-lg hover:bg-green-700 transition-colors font-medium"
+          >
+            Contact Us
+          </button>
+        </div>
       </div>
-    </header>
+    </section>
   );
 }

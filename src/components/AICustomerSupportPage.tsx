@@ -1,223 +1,314 @@
 import React from 'react';
-import { MessageCircle, Calendar, Globe, Database, ArrowRight } from 'lucide-react';
+import { ArrowLeft, MessageCircle, Clock, Users, CheckCircle, ArrowRight } from 'lucide-react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
-interface ServicesProps {
+interface AICustomerSupportPageProps {
+  onBack: () => void;
+  onNavigate: (page: string) => void;
   onContactClick: () => void;
 }
 
-export default function Services({ onContactClick }: ServicesProps) {
-  const titleAnimation = useScrollAnimation();
-  const gridAnimation = useScrollAnimation();
+export default function AICustomerSupportPage({ onBack, onNavigate, onContactClick }: AICustomerSupportPageProps) {
+  const heroAnimation = useScrollAnimation();
+  const problemAnimation = useScrollAnimation();
+  const solutionAnimation = useScrollAnimation();
+  const benefitsAnimation = useScrollAnimation();
+  const faqAnimation = useScrollAnimation();
   const ctaAnimation = useScrollAnimation();
 
-  // Add Service and FAQ schema to head
   React.useEffect(() => {
-    const serviceSchema = {
+    const schema = {
       "@context": "https://schema.org",
       "@type": "Service",
-      "name": "AI Automation Services",
-      "description": "Comprehensive AI automation solutions including customer support agents, appointment setting, CRM integration, and website development.",
+      "name": "AI Customer Support Agents",
+      "description": "24/7 AI-powered customer support agents that instantly resolve customer queries, freeing your team for high-value work.",
       "provider": {
         "@type": "Organization",
         "name": "SimpleAI",
         "url": "https://justsimpleai.com"
       },
-      "serviceType": "AI Automation",
+      "serviceType": "AI Customer Support",
       "areaServed": "Worldwide",
-      "hasOfferingCatalog": {
-        "@type": "OfferingCatalog",
-        "name": "AI Automation Services",
-        "itemListElement": [
-        {
-          "@type": "Service",
-          "@id": "https://justsimpleai.com/services/ai-customer-support",
-          "name": "AI Customer Support Agents",
-          "description": "Available 24/7, instantly resolving customer queries, freeing your team for high-value work.",
-          "provider": {
-            "@type": "Organization",
-            "name": "SimpleAI",
-            "url": "https://justsimpleai.com"
-          },
-          "serviceType": "AI Customer Support",
-          "category": "Customer Service Automation",
-          "areaServed": "Worldwide",
-          "availableChannel": {
-            "@type": "ServiceChannel",
-            "serviceUrl": "https://justsimpleai.com/contact",
-            "serviceName": "Online Consultation"
-          }
-        },
-        {
-          "@type": "Service",
-          "@id": "https://justsimpleai.com/services/ai-appointment-setting",
-          "name": "AI Appointment Setting Agents",
-          "description": "Never miss a lead with AI agents that schedule, confirm, and manage appointments automatically.",
-          "provider": {
-            "@type": "Organization",
-            "name": "SimpleAI",
-            "url": "https://justsimpleai.com"
-          },
-          "serviceType": "AI Appointment Scheduling",
-          "category": "Sales Automation",
-          "areaServed": "Worldwide",
-          "availableChannel": {
-            "@type": "ServiceChannel",
-            "serviceUrl": "https://justsimpleai.com/contact",
-            "serviceName": "Online Consultation"
-          }
-        },
-        {
-          "@type": "Service",
-          "@id": "https://justsimpleai.com/services/crm-integration",
-          "name": "CRM Integration Services",
-          "description": "Seamlessly connect your existing CRM with AI automation for streamlined lead management and improved conversion rates.",
-          "provider": {
-            "@type": "Organization",
-            "name": "SimpleAI",
-            "url": "https://justsimpleai.com"
-          },
-          "serviceType": "CRM Integration",
-          "category": "Business Process Automation",
-          "areaServed": "Worldwide",
-          "availableChannel": {
-            "@type": "ServiceChannel",
-            "serviceUrl": "https://justsimpleai.com/contact",
-            "serviceName": "Online Consultation"
-          }
-        },
-        {
-          "@type": "Service",
-          "@id": "https://justsimpleai.com/services/website-development",
-          "name": "AI-Assisted Website Development",
-          "description": "Professional, AI-assisted websites designed to convert visitors into paying customers with modern design and optimization.",
-          "provider": {
-            "@type": "Organization",
-            "name": "SimpleAI",
-            "url": "https://justsimpleai.com"
-          },
-          "serviceType": "Website Development",
-          "category": "Web Design & Development",
-          "areaServed": "Worldwide",
-          "availableChannel": {
-            "@type": "ServiceChannel",
-            "serviceUrl": "https://justsimpleai.com/contact",
-            "serviceName": "Online Consultation"
-          }
-        }
-      ]
+      "offers": {
+        "@type": "Offer",
+        "description": "24/7 automated customer support",
+        "availability": "https://schema.org/InStock"
       }
     };
 
-    // Add schema to head
     const script = document.createElement('script');
     script.type = 'application/ld+json';
-    script.textContent = JSON.stringify(serviceSchema);
-    script.id = 'services-schema';
+    script.textContent = JSON.stringify(schema);
+    script.id = 'ai-customer-support-schema';
     document.head.appendChild(script);
 
-    // Cleanup function
     return () => {
-      const existingScript = document.getElementById('services-schema');
+      const existingScript = document.getElementById('ai-customer-support-schema');
       if (existingScript) {
         document.head.removeChild(existingScript);
       }
     };
   }, []);
 
-  const services = [
+  const benefits = [
+    { icon: Clock, title: "24/7 Availability", description: "Never miss a customer inquiry again" },
+    { icon: Users, title: "Instant Responses", description: "Resolve queries in seconds, not hours" },
+    { icon: MessageCircle, title: "Human-like Conversations", description: "Natural, helpful interactions every time" }
+  ];
+
+  const faqs = [
     {
-      icon: MessageCircle,
-      title: 'AI Customer Support Agents',
-      description: 'Available 24/7, instantly resolving customer queries, freeing your team for high-value work.',
-      cta: 'See Customer Support in Action'
+      question: "How quickly can AI support be set up?",
+      answer: "Most AI customer support systems can be deployed within 1-2 weeks, including training on your specific business knowledge and integration with existing systems."
     },
     {
-      icon: Calendar,
-      title: 'AI Appointment Setting Agents',
-      description: 'Never miss a lead — our AI agents schedule, confirm, and manage appointments automatically.',
-      cta: 'Book More Calls with AI'
+      question: "Can the AI handle complex customer issues?",
+      answer: "Yes, our AI agents are trained on your business processes and can handle 80-90% of common inquiries. Complex issues are seamlessly escalated to human agents."
     },
     {
-      icon: Database,
-      title: 'CRM Integration',
-      description: 'Seamlessly connect your existing CRM with AI automation for streamlined lead management.',
-      cta: 'Optimize Your CRM'
+      question: "Will customers know they're talking to AI?",
+      answer: "The AI provides natural, helpful responses. You can choose to disclose it's AI or let the quality of service speak for itself - many customers prefer the instant, accurate responses."
     },
     {
-      icon: Globe,
-      title: 'Website Build & Design',
-      description: 'Professional, AI-assisted websites designed to convert visitors into paying customers.',
-      cta: 'See Our Website Solutions'
+      question: "How does it integrate with our existing systems?",
+      answer: "Our AI integrates with popular platforms like Zendesk, Intercom, Salesforce, and custom systems through APIs. We handle the technical setup for you."
     }
   ];
 
   return (
-    <section id="services" className="py-12 sm:py-16 lg:py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div 
-          ref={titleAnimation.ref}
-          className={`text-center mb-16 animate-fade-in-up ${titleAnimation.isVisible ? 'visible' : ''}`}
-        >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Our Services
-          </h2>
-          <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto px-4">
-            Comprehensive AI automation solutions to streamline your business operations
-          </p>
+    <div className="min-h-screen bg-white">
+      {/* Hero Section */}
+      <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-blue-50 to-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div 
+            ref={heroAnimation.ref}
+            className={`text-center animate-fade-in-up ${heroAnimation.isVisible ? 'visible' : ''}`}
+          >
+            <div className="mb-6">
+              <span className="inline-block bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium">
+                💬 AI Customer Support
+              </span>
+            </div>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+              24/7 AI Customer Support
+            </h1>
+            <p className="text-lg sm:text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+              Never miss a customer inquiry again. Our AI agents provide instant, accurate support around the clock, freeing your team to focus on growing your business.
+            </p>
+            <button
+              onClick={onContactClick}
+              className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-blue-600 hover:to-blue-700 transition-all duration-300 text-lg shadow-lg hover:shadow-xl hover:-translate-y-1"
+            >
+              Get Your AI Support Agent
+            </button>
+          </div>
         </div>
+      </section>
 
-        <div 
-          ref={gridAnimation.ref}
-          className={`grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-12 animate-fade-in-up items-stretch ${gridAnimation.isVisible ? 'visible' : ''}`}
-        >
-          {services.map((service, index) => {
-            const IconComponent = service.icon;
-            return (
-              <div
-                key={index}
-                className={`bg-white p-6 sm:p-8 rounded-lg shadow-lg border border-gray-100 hover:shadow-xl transition-shadow group animate-fade-in-up animate-stagger-${index + 1} ${gridAnimation.isVisible ? 'visible' : ''} flex flex-col justify-between h-full min-h-[320px]`}
-              >
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-6 group-hover:bg-green-200 transition-colors">
-                    <IconComponent className="w-6 h-6 text-green-500" />
+      {/* Problem Section */}
+      <section className="py-12 sm:py-16 lg:py-20 bg-red-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div 
+            ref={problemAnimation.ref}
+            className={`animate-fade-in-up ${problemAnimation.isVisible ? 'visible' : ''}`}
+          >
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-8 text-center">
+              Customer Support Challenges
+            </h2>
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <p className="text-lg text-gray-700 mb-6">
+                  Long response times frustrate customers and hurt your reputation. Manual support is expensive, inconsistent, and can't scale with your business growth.
+                </p>
+                <p className="text-lg text-gray-700 mb-6">
+                  Every delayed response is a potential lost customer. Your team spends hours on repetitive questions instead of focusing on complex issues that truly need human attention.
+                </p>
+                <p className="text-lg text-gray-700">
+                  Meanwhile, your competitors with AI support are providing instant, 24/7 service that customers love.
+                </p>
+              </div>
+              <div className="bg-white p-8 rounded-xl shadow-lg">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Support Problems:</h3>
+                <ul className="space-y-3">
+                  <li className="flex items-start">
+                    <span className="text-red-500 mr-3">•</span>
+                    <span>Average 24-hour response time</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-red-500 mr-3">•</span>
+                    <span>High support costs per ticket</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-red-500 mr-3">•</span>
+                    <span>Inconsistent service quality</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-red-500 mr-3">•</span>
+                    <span>No after-hours support</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Solution Section */}
+      <section className="py-12 sm:py-16 lg:py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div 
+            ref={solutionAnimation.ref}
+            className={`animate-fade-in-up ${solutionAnimation.isVisible ? 'visible' : ''}`}
+          >
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-8 text-center">
+              AI-Powered Customer Support
+            </h2>
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">Instant, Intelligent Support</h3>
+                <p className="text-lg text-gray-700 mb-6">
+                  Our AI customer support agents understand your business, products, and policies. They provide accurate, helpful responses instantly, escalating complex issues to your human team when needed.
+                </p>
+                <p className="text-lg text-gray-700 mb-6">
+                  Available 24/7 across all channels - chat, email, social media. Your customers get the help they need, when they need it, leading to higher satisfaction and loyalty.
+                </p>
+                <div className="space-y-4">
+                  <div className="flex items-center">
+                    <CheckCircle className="text-green-500 mr-3" size={20} />
+                    <span>Instant responses to common questions</span>
                   </div>
-                  <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4">
-                    {service.title}
-                  </h3>
-                  <p className="text-sm sm:text-base text-gray-600 mb-6 leading-relaxed">
-                    {service.description}
-                  </p>
-                </div>
-                <div className="flex-shrink-0 mt-auto">
-                  <button 
-                    onClick={onContactClick}
-                    className="text-green-500 font-medium hover:text-green-700 transition-colors flex items-center gap-2 group text-sm sm:text-base"
-                  >
-                    {service.cta}
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </button>
+                  <div className="flex items-center">
+                    <CheckCircle className="text-green-500 mr-3" size={20} />
+                    <span>Smart escalation to human agents</span>
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="text-green-500 mr-3" size={20} />
+                    <span>Multi-channel support integration</span>
+                  </div>
                 </div>
               </div>
-            );
-          })}
+              <div className="bg-gray-50 p-8 rounded-xl">
+                <h4 className="text-lg font-bold text-gray-900 mb-4">AI Support Features:</h4>
+                <ul className="space-y-3">
+                  <li>• 24/7 availability across all channels</li>
+                  <li>• Instant response to 90% of inquiries</li>
+                  <li>• Natural language understanding</li>
+                  <li>• Integration with your knowledge base</li>
+                  <li>• Seamless handoff to human agents</li>
+                  <li>• Multi-language support</li>
+                  <li>• Analytics and performance tracking</li>
+                  <li>• Continuous learning and improvement</li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
+      </section>
 
-        <div 
-          ref={ctaAnimation.ref}
-          className={`text-center animate-fade-in-up ${ctaAnimation.isVisible ? 'visible' : ''}`}
-        >
-          <p className="text-base sm:text-lg text-gray-600 mb-6 px-4">
-            Looking for a custom AI solution? Let's talk.
-          </p>
-          <button 
-            onClick={onContactClick}
-            className="bg-green-500 text-white px-6 sm:px-8 py-3 rounded-lg hover:bg-green-700 transition-colors font-medium"
+      {/* Benefits Section */}
+      <section className="py-12 sm:py-16 lg:py-20 bg-blue-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div 
+            ref={benefitsAnimation.ref}
+            className={`animate-fade-in-up ${benefitsAnimation.isVisible ? 'visible' : ''}`}
           >
-            Contact Us
-          </button>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-12 text-center">
+              Transform Your Customer Experience
+            </h2>
+            <div className="grid md:grid-cols-3 gap-8">
+              {benefits.map((benefit, index) => (
+                <div key={index} className="bg-white p-8 rounded-xl shadow-lg text-center">
+                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <benefit.icon className="text-blue-500" size={32} />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">{benefit.title}</h3>
+                  <p className="text-gray-600">{benefit.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-12 sm:py-16 lg:py-20 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div 
+            ref={faqAnimation.ref}
+            className={`animate-fade-in-up ${faqAnimation.isVisible ? 'visible' : ''}`}
+          >
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-12 text-center">
+              AI Customer Support Questions
+            </h2>
+            <div className="space-y-6">
+              {faqs.map((faq, index) => (
+                <div key={index} className="bg-gray-50 p-6 rounded-xl">
+                  <h3 className="text-lg font-bold text-gray-900 mb-3">{faq.question}</h3>
+                  <p className="text-gray-700">{faq.answer}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Related Services */}
+      <section className="py-12 sm:py-16 lg:py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8 text-center">
+            Complete Your AI Automation
+          </h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            <button
+              onClick={() => onNavigate('ai-appointment-setting')}
+              className="bg-white p-6 rounded-xl hover:bg-gray-100 transition-colors text-left group shadow-lg"
+            >
+              <h3 className="font-bold text-gray-900 mb-2 group-hover:text-green-600">AI Appointment Setting</h3>
+              <p className="text-sm text-gray-600">Automated scheduling system</p>
+              <ArrowRight className="text-green-500 mt-2 group-hover:translate-x-1 transition-transform" size={16} />
+            </button>
+            <button
+              onClick={() => onNavigate('ai-crm-integration')}
+              className="bg-white p-6 rounded-xl hover:bg-gray-100 transition-colors text-left group shadow-lg"
+            >
+              <h3 className="font-bold text-gray-900 mb-2 group-hover:text-green-600">AI CRM Integration</h3>
+              <p className="text-sm text-gray-600">Streamlined lead management</p>
+              <ArrowRight className="text-green-500 mt-2 group-hover:translate-x-1 transition-transform" size={16} />
+            </button>
+            <button
+              onClick={() => onNavigate('website-build-design')}
+              className="bg-white p-6 rounded-xl hover:bg-gray-100 transition-colors text-left group shadow-lg"
+            >
+              <h3 className="font-bold text-gray-900 mb-2 group-hover:text-green-600">Website Build & Design</h3>
+              <p className="text-sm text-gray-600">Professional web presence</p>
+              <ArrowRight className="text-green-500 mt-2 group-hover:translate-x-1 transition-transform" size={16} />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-r from-blue-500 to-blue-700">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div 
+            ref={ctaAnimation.ref}
+            className={`animate-fade-in-up ${ctaAnimation.isVisible ? 'visible' : ''}`}
+          >
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-6">
+              Ready for 24/7 Customer Support?
+            </h2>
+            <p className="text-lg sm:text-xl text-blue-100 mb-8">
+              Join businesses providing instant, accurate support that customers love.
+            </p>
+            <button
+              onClick={onContactClick}
+              className="bg-white text-blue-500 px-8 py-4 rounded-xl font-semibold hover:bg-gray-100 transition-colors text-lg shadow-lg"
+            >
+              Start Your AI Support Trial
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }

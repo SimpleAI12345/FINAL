@@ -26,6 +26,21 @@ export default function Services({ onContactClick }: ServicesProps) {
       "serviceType": "AI Automation",
       "areaServed": "Worldwide",
       "hasOfferingCatalog": {
+  // Add Service and FAQ schema to head
+  React.useEffect(() => {
+    const serviceSchema = {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "AI Automation Services",
+      "description": "Comprehensive AI automation solutions including customer support agents, appointment setting, CRM integration, and website development.",
+      "provider": {
+        "@type": "Organization",
+        "name": "SimpleAI",
+        "url": "https://justsimpleai.com"
+      },
+      "serviceType": "AI Automation",
+      "areaServed": "Worldwide",
+      "hasOfferingCatalog": {
         "@type": "OfferingCatalog",
         "name": "AI Automation Services",
         "itemListElement": [
@@ -176,26 +191,26 @@ export default function Services({ onContactClick }: ServicesProps) {
             return (
               <div
                 key={index}
-                className={`bg-white p-6 sm:p-8 rounded-lg shadow-lg border border-gray-100 hover:shadow-xl transition-shadow group animate-fade-in-up animate-stagger-${index + 1} ${gridAnimation.isVisible ? 'visible' : ''} flex flex-col justify-between h-full min-h-[320px]`}
+                className={`bg-white p-6 sm:p-8 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group animate-fade-in-up animate-stagger-${index + 1} ${gridAnimation.isVisible ? 'visible' : ''} flex flex-col justify-between h-full min-h-[350px]`}
               >
                 <div className="flex-shrink-0">
-                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-6 group-hover:bg-green-200 transition-colors">
-                    <IconComponent className="w-6 h-6 text-green-500" />
+                  <div className="w-16 h-16 bg-gradient-to-br from-green-100 to-green-200 rounded-2xl flex items-center justify-center mb-6 group-hover:from-green-200 group-hover:to-green-300 transition-all duration-300">
+                    <IconComponent className="w-8 h-8 text-green-600" />
                   </div>
-                  <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4">
+                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 group-hover:text-green-600 transition-colors">
                     {service.title}
                   </h3>
-                  <p className="text-sm sm:text-base text-gray-600 mb-6 leading-relaxed">
+                  <p className="text-base sm:text-lg text-gray-600 mb-6 leading-relaxed">
                     {service.description}
                   </p>
                 </div>
                 <div className="flex-shrink-0 mt-auto">
                   <button 
                     onClick={onContactClick}
-                    className="text-green-500 font-medium hover:text-green-700 transition-colors flex items-center gap-2 group text-sm sm:text-base"
+                    className="text-green-600 font-semibold hover:text-green-700 transition-colors flex items-center gap-2 group text-base sm:text-lg"
                   >
                     {service.cta}
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </button>
                 </div>
               </div>
@@ -212,7 +227,7 @@ export default function Services({ onContactClick }: ServicesProps) {
           </p>
           <button 
             onClick={onContactClick}
-            className="bg-green-500 text-white px-6 sm:px-8 py-3 rounded-lg hover:bg-green-700 transition-colors font-medium"
+            className="bg-gradient-to-r from-green-500 to-green-600 text-white px-8 sm:px-10 py-4 rounded-xl hover:from-green-600 hover:to-green-700 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl hover:-translate-y-1"
           >
             Contact Us
           </button>
