@@ -71,80 +71,57 @@ export default function App() {
     window.history.pushState({}, '', '/terms');
   };
 
-  const navigateToAICustomerSupport = () => {
-    setCurrentPage('ai-customer-support');
-    window.history.pushState({}, '', '/ai-customer-support');
-  };
-
-  const navigateToAIAppointmentSetting = () => {
-    setCurrentPage('ai-appointment-setting');
-    window.history.pushState({}, '', '/ai-appointment-setting');
-  };
-
-  const navigateToAICRMIntegration = () => {
-    setCurrentPage('ai-crm-integration');
-    window.history.pushState({}, '', '/ai-crm-integration');
-  };
-
-  const navigateToWebsiteBuildDesign = () => {
-    setCurrentPage('website-build-design');
-    window.history.pushState({}, '', '/website-build-design');
+  const navigateToPage = (page: string) => {
+    setCurrentPage(page);
+    window.history.pushState({}, '', `/${page}`);
   };
 
   if (currentPage === 'contact') {
-    return <ContactPage onBackToHome={navigateToHome} />;
+    return <ContactPage onBack={navigateToHome} />;
   }
 
   if (currentPage === 'privacy') {
-    return <PrivacyPolicy onBackToHome={navigateToHome} />;
+    return <PrivacyPolicy onBack={navigateToHome} />;
   }
 
   if (currentPage === 'terms') {
-    return <TermsOfService onBackToHome={navigateToHome} />;
+    return <TermsOfService onBack={navigateToHome} />;
   }
 
   if (currentPage === 'ai-customer-support') {
-    return <AICustomerSupportPage onBackToHome={navigateToHome} onContactClick={navigateToContact} />;
+    return <AICustomerSupportPage onBack={navigateToHome} onNavigate={navigateToPage} onContactClick={navigateToContact} />;
   }
 
   if (currentPage === 'ai-appointment-setting') {
-    return <AIAppointmentSettingPage onBackToHome={navigateToHome} onContactClick={navigateToContact} />;
+    return <AIAppointmentSettingPage onBack={navigateToHome} onNavigate={navigateToPage} onContactClick={navigateToContact} />;
   }
 
   if (currentPage === 'ai-crm-integration') {
-    return <AICRMIntegrationPage onBackToHome={navigateToHome} onContactClick={navigateToContact} />;
+    return <AICRMIntegrationPage onBack={navigateToHome} onNavigate={navigateToPage} onContactClick={navigateToContact} />;
   }
 
   if (currentPage === 'website-build-design') {
-    return <WebsiteBuildDesignPage onBackToHome={navigateToHome} onContactClick={navigateToContact} />;
+    return <WebsiteBuildDesignPage onBack={navigateToHome} onNavigate={navigateToPage} onContactClick={navigateToContact} />;
   }
 
   return (
     <div className="min-h-screen bg-white">
       <Header 
         onContactClick={navigateToContact}
-        onPrivacyClick={navigateToPrivacy}
         onTermsClick={navigateToTerms}
-        onAICustomerSupportClick={navigateToAICustomerSupport}
-        onAIAppointmentSettingClick={navigateToAIAppointmentSetting}
-        onAICRMIntegrationClick={navigateToAICRMIntegration}
-        onWebsiteBuildDesignClick={navigateToWebsiteBuildDesign}
       />
       <Hero onContactClick={navigateToContact} />
       <PainPoints />
       <Services onContactClick={navigateToContact} />
       <About />
-      <HowItWorks />
+      <HowItWorks onContactClick={navigateToContact} />
       <Authority />
       <CallToAction onContactClick={navigateToContact} />
       <Footer 
         onContactClick={navigateToContact}
         onPrivacyClick={navigateToPrivacy}
         onTermsClick={navigateToTerms}
-        onAICustomerSupportClick={navigateToAICustomerSupport}
-        onAIAppointmentSettingClick={navigateToAIAppointmentSetting}
-        onAICRMIntegrationClick={navigateToAICRMIntegration}
-        onWebsiteBuildDesignClick={navigateToWebsiteBuildDesign}
+        onNavigate={navigateToPage}
       />
       <ScrollToTop />
     </div>
