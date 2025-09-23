@@ -26,21 +26,6 @@ export default function Services({ onContactClick }: ServicesProps) {
       "serviceType": "AI Automation",
       "areaServed": "Worldwide",
       "hasOfferingCatalog": {
-  // Add Service and FAQ schema to head
-  React.useEffect(() => {
-    const serviceSchema = {
-      "@context": "https://schema.org",
-      "@type": "Service",
-      "name": "AI Automation Services",
-      "description": "Comprehensive AI automation solutions including customer support agents, appointment setting, CRM integration, and website development.",
-      "provider": {
-        "@type": "Organization",
-        "name": "SimpleAI",
-        "url": "https://justsimpleai.com"
-      },
-      "serviceType": "AI Automation",
-      "areaServed": "Worldwide",
-      "hasOfferingCatalog": {
         "@type": "OfferingCatalog",
         "name": "AI Automation Services",
         "itemListElement": [
@@ -189,17 +174,7 @@ export default function Services({ onContactClick }: ServicesProps) {
           {services.map((service, index) => {
             const IconComponent = service.icon;
             return (
-                  if (currentPage !== 'home') {
-                    onNavigate('home');
-                    setTimeout(() => scrollToSection(item.href), 100);
-                  } else {
-                    if (currentPage !== 'home') {
-                      onNavigate('home');
-                      setTimeout(() => scrollToSection(item.href), 100);
-                    } else {
-                      scrollToSection(item.href);
-                    }
-                  }
+              <div
                 key={index}
                 className={`bg-white p-6 sm:p-8 rounded-lg shadow-lg border border-gray-100 hover:shadow-xl transition-shadow group animate-fade-in-up animate-stagger-${index + 1} ${gridAnimation.isVisible ? 'visible' : ''} flex flex-col justify-between h-full min-h-[320px]`}
               >
