@@ -16,25 +16,25 @@ export default function Services({ onContactClick }: ServicesProps) {
       icon: MessageCircle,
       title: 'AI Customer Support Agents',
       description: 'Available 24/7, instantly resolving customer queries, freeing your team for high-value work.',
-      cta: 'See Customer Support in Action →'
+      cta: 'See Customer Support in Action'
     },
     {
       icon: Calendar,
       title: 'AI Appointment Setting Agents',
       description: 'Never miss a lead — our AI agents schedule, confirm, and manage appointments automatically.',
-      cta: 'Book More Calls with AI →'
-    },
-    {
-      icon: Globe,
-      title: 'Website Build & Design',
-      description: 'Professional, AI-assisted websites designed to convert visitors into paying customers.',
-      cta: 'See Our Website Solutions →'
+      cta: 'Book More Calls with AI'
     },
     {
       icon: Database,
       title: 'CRM Integration',
       description: 'Seamlessly connect your existing CRM with AI automation for streamlined lead management.',
-      cta: 'Optimize Your CRM →'
+      cta: 'Optimize Your CRM'
+    },
+    {
+      icon: Globe,
+      title: 'Website Build & Design',
+      description: 'Professional, AI-assisted websites designed to convert visitors into paying customers.',
+      cta: 'See Our Website Solutions'
     }
   ];
 
@@ -73,7 +73,10 @@ export default function Services({ onContactClick }: ServicesProps) {
                 <p className="text-sm sm:text-base text-gray-600 mb-6 leading-relaxed">
                   {service.description}
                 </p>
-                <button className="text-green-500 font-medium hover:text-green-700 transition-colors flex items-center gap-2 group text-sm sm:text-base">
+                <button 
+                  onClick={onContactClick}
+                  className="text-green-500 font-medium hover:text-green-700 transition-colors flex items-center gap-2 group text-sm sm:text-base"
+                >
                   {service.cta}
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </button>
