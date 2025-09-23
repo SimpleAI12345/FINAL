@@ -62,7 +62,7 @@ export default function Services({ onContactClick }: ServicesProps) {
             return (
               <div
                 key={index}
-                className={`bg-white p-6 sm:p-8 rounded-lg shadow-lg border border-gray-100 hover:shadow-xl transition-shadow group animate-fade-in-up animate-stagger-${index + 1} ${gridAnimation.isVisible ? 'visible' : ''}`}
+                className={`bg-white p-6 sm:p-8 rounded-lg shadow-lg border border-gray-100 hover:shadow-xl transition-shadow group animate-fade-in-up animate-stagger-${index + 1} ${gridAnimation.isVisible ? 'visible' : ''} flex flex-col h-full`}
               >
                 <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-6 group-hover:bg-green-200 transition-colors">
                   <IconComponent className="w-6 h-6 text-green-500" />
@@ -70,12 +70,12 @@ export default function Services({ onContactClick }: ServicesProps) {
                 <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4">
                   {service.title}
                 </h3>
-                <p className="text-sm sm:text-base text-gray-600 mb-6 leading-relaxed">
+                <p className="text-sm sm:text-base text-gray-600 mb-6 leading-relaxed flex-grow">
                   {service.description}
                 </p>
                 <button 
                   onClick={onContactClick}
-                  className="text-green-500 font-medium hover:text-green-700 transition-colors flex items-center gap-2 group text-sm sm:text-base"
+                  className="text-green-500 font-medium hover:text-green-700 transition-colors flex items-center gap-2 group text-sm sm:text-base mt-auto"
                 >
                   {service.cta}
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
