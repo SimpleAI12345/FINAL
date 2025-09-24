@@ -2,17 +2,17 @@ import React from 'react';
 import { ArrowLeft } from 'lucide-react';
 
 interface PrivacyPolicyProps {
-  onBack: () => void;
+  onNavigate: (page: string) => void;
 }
 
-export default function PrivacyPolicy({ onBack }: PrivacyPolicyProps) {
+export default function PrivacyPolicy({ onNavigate }: PrivacyPolicyProps) {
   return (
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="bg-white rounded-lg shadow-sm p-8 mb-8">
           <button
-            onClick={onBack}
+            onClick={() => onNavigate('home')}
             className="flex items-center text-gray-600 hover:text-gray-900 mb-6 transition-colors"
           >
             <ArrowLeft className="w-5 h-5 mr-2" />
