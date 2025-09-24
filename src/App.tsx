@@ -90,7 +90,12 @@ export default function App() {
       <main>
         {renderCurrentPage()}
       </main>
-      <Footer onNavigate={handleNavigate} />
+      <Footer 
+        onNavigate={handleNavigate}
+        onContactClick={handleContactClick}
+        onPrivacyClick={() => handleNavigate('privacy')}
+        onTermsClick={() => handleNavigate('terms')}
+      />
     </div>
   );
 }
