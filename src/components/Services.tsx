@@ -4,9 +4,10 @@ import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 interface ServicesProps {
   onContactClick: () => void;
+  onNavigate: (page: string) => void;
 }
 
-export default function Services({ onContactClick }: ServicesProps) {
+export default function Services({ onContactClick, onNavigate }: ServicesProps) {
   const titleAnimation = useScrollAnimation();
   const gridAnimation = useScrollAnimation();
   const ctaAnimation = useScrollAnimation();
@@ -130,25 +131,29 @@ export default function Services({ onContactClick }: ServicesProps) {
       icon: MessageCircle,
       title: 'AI Customer Support Agents',
       description: 'Available 24/7, instantly resolving customer queries, freeing your team for high-value work.',
-      cta: 'See Customer Support in Action'
+      cta: 'See Customer Support in Action',
+      page: 'ai-customer-support'
     },
     {
       icon: Calendar,
       title: 'AI Appointment Setting Agents',
       description: 'Never miss a lead — our AI agents schedule, confirm, and manage appointments automatically.',
-      cta: 'Book More Calls with AI'
+      cta: 'Book More Calls with AI',
+      page: 'ai-appointment-setting'
     },
     {
       icon: Database,
       title: 'CRM Integration',
       description: 'Seamlessly connect your existing CRM with AI automation for streamlined lead management.',
-      cta: 'Optimize Your CRM'
+      cta: 'Optimize Your CRM',
+      page: 'ai-crm-integration'
     },
     {
       icon: Globe,
       title: 'Website Build & Design',
       description: 'Professional, AI-assisted websites designed to convert visitors into paying customers.',
-      cta: 'See Our Website Solutions'
+      cta: 'See Our Website Solutions',
+      page: 'website-build-design'
     }
   ];
 
@@ -191,7 +196,7 @@ export default function Services({ onContactClick }: ServicesProps) {
                 </div>
                 <div className="flex-shrink-0 mt-auto">
                   <button 
-                    onClick={onContactClick}
+                    onClick={() => onNavigate(service.page)}
                     className="text-green-600 font-semibold hover:text-green-700 transition-colors flex items-center gap-2 group text-base sm:text-lg"
                   >
                     {service.cta}

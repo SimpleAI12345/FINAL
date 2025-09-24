@@ -69,6 +69,7 @@ export default function App() {
             <Hero onContactClick={handleContactClick} />
             <PainPoints />
             <Services onContactClick={handleContactClick} />
+            <Services onContactClick={handleContactClick} onNavigate={handleNavigate} />
             <About />
             <HowItWorks />
             <Authority />
