@@ -78,14 +78,14 @@ export default function AIAppointmentSettingPage({ onBack, onNavigate, onContact
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <div className="bg-white border-b border-gray-100 py-4 sticky top-0 z-40">
+      <div className="bg-white border-b border-gray-100 py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <button
             onClick={onBack}
-            className="flex items-center text-gray-600 hover:text-gray-900 transition-colors font-medium"
+            className="flex items-center text-gray-600 hover:text-gray-900 transition-colors font-medium bg-gray-100 px-4 py-2 rounded-lg hover:bg-gray-200"
           >
             <ArrowLeft className="w-5 h-5 mr-2" />
-            Back to Home
+            ← Back to Home
           </button>
         </div>
       </div>
