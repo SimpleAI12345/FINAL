@@ -56,13 +56,13 @@ export default function App() {
       case 'terms':
         return <TermsOfService onNavigate={handleNavigate} />;
       case 'ai-customer-support':
-        return <AICustomerSupportPage onNavigate={handleNavigate} onContactClick={handleContactClick} />;
+        return <AICustomerSupportPage onBack={() => handleNavigate('home')} onNavigate={handleNavigate} onContactClick={handleContactClick} />;
       case 'ai-appointment-setting':
-        return <AIAppointmentSettingPage onNavigate={handleNavigate} onContactClick={handleContactClick} />;
+        return <AIAppointmentSettingPage onBack={() => handleNavigate('home')} onNavigate={handleNavigate} onContactClick={handleContactClick} />;
       case 'ai-crm-integration':
-        return <AICRMIntegrationPage onNavigate={handleNavigate} onContactClick={handleContactClick} />;
+        return <AICRMIntegrationPage onBack={() => handleNavigate('home')} onNavigate={handleNavigate} onContactClick={handleContactClick} />;
       case 'website-build-design':
-        return <WebsiteBuildDesignPage onNavigate={handleNavigate} onContactClick={handleContactClick} />;
+        return <WebsiteBuildDesignPage onBack={() => handleNavigate('home')} onNavigate={handleNavigate} onContactClick={handleContactClick} />;
       default:
         return (
           <>
