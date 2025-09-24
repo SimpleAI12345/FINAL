@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Play } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 interface HeroProps {
@@ -41,13 +41,6 @@ export default function Hero({ onContactClick }: HeroProps) {
             >
               Get Your AI Solution
               <ArrowRight className="w-5 h-5" />
-            </button>
-            
-            <button className="flex items-center gap-3 text-gray-700 hover:text-green-600 transition-colors font-medium text-lg">
-              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow">
-                <Play className="w-5 h-5 text-green-500 ml-1" />
-              </div>
-              Watch Demo
             </button>
           </div>
 
